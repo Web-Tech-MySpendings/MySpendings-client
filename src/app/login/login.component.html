@@ -3,15 +3,15 @@
 
         <mat-toolbar color="primary">Login</mat-toolbar>
 
-        <form fxLayoutAlign="stretch" fxLayout="column" class="login-form">
+        <form fxLayoutAlign="stretch" fxLayout="column" class="login-form" [formGroup]="formGroup" (ngSubmit)="loginProces()">
             <mat-form-field>
                 <mat-label>E-Mail</mat-label>
-                <input matInput type="email" placeholder="E-Mail">
+                <input matInput type="email" placeholder="E-Mail" formControlName="email">
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>Password</mat-label>
-                <input matInput type="password" placeholder="Password">
+                <input matInput type="password" placeholder="Password" formControlName="pass">
             </mat-form-field>
 
             <button mat-raised-button type="submit">Login</button>
