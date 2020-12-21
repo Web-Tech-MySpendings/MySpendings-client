@@ -18,7 +18,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SaldoComponent } from './saldo/saldo.component';
-
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -26,6 +26,7 @@ import { SaldoComponent } from './saldo/saldo.component';
     AppComponent,
     LoginComponent,
     SaldoComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
