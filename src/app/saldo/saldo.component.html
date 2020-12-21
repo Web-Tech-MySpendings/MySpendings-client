@@ -1,24 +1,20 @@
 
-<mat-toolbar color="primary">mySpendings</mat-toolbar>
-<mat-card>
-    <span>0.00</span>
-    <span> €</span>
-</mat-card>
+<div class="appContainer">
+    <mat-toolbar color="primary">
+        <span>mySpendings</span>
+    </mat-toolbar>
+    <mat-card class="balance">
+        <span>0.00</span>
+        <span> €</span>
+    </mat-card>
+
+    <mat-card class="diagram">
+        <p>This is space for a diagramm</p>
+    </mat-card>
 
 
-<!--Plus Button-->
-<section id="btn_plus">
-    <div class="example-button-row">
-      <div class="example-flex-container">
-        <div class="example-button-container">
-          <button
-            mat-fab
-            color="primary"
-            aria-label="Example icon button with a delete icon"
-          >
-            +
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
+    <mat-card class="add">
+        <button mat-fab color="primary" id="btn_plus">+</button> 
+    </mat-card>
+
+</div>
