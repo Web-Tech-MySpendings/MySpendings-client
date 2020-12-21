@@ -12,7 +12,11 @@
 
             <mat-form-field>
                 <mat-label>Password</mat-label>
-                <input matInput type="password" placeholder="Password" formControlName="pass">
+                <input [(ngModel)]="pw1" matInput type="password" placeholder="Password" formControlName="pass1" (change)="checkPassword()">
+            </mat-form-field>
+            <mat-form-field >
+                <mat-label>Repeat Password</mat-label>
+                <input [ngStyle]="{'color':samePw === true ? 'green' : 'red' }" [(ngModel)]="pw2" matInput type="password" placeholder="Password" formControlName="pass2" (change)="checkPassword()">
             </mat-form-field>
 
             <mat-form-field>
@@ -25,3 +29,6 @@
           
     </mat-card>
 </div>
+<!--
+    [ngStyle]="{'border-color':samePw === true ? 'green' : 'red' }"
+-->

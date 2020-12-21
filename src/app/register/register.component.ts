@@ -9,6 +9,9 @@ import { RegisterService } from '../register.service';
 })
 export class RegisterComponent implements OnInit {
   formGroup: FormGroup;
+  pw1: Text;
+  pw2: Text;
+  samePw: Boolean;
 
   constructor(private registerService: RegisterService) { }
 
@@ -22,7 +25,8 @@ export class RegisterComponent implements OnInit {
     this.formGroup=new FormGroup({
       email: new FormControl('', [Validators.required]),
       name: new FormControl('', [Validators.required]),  
-      pass: new FormControl('', [Validators.required])
+      pass1: new FormControl('', [Validators.required]),
+      pass2: new FormControl('', [Validators.required])
     })
   }
 
@@ -38,6 +42,14 @@ export class RegisterComponent implements OnInit {
           alert(result.message);
         }
       })
+    }
+  }
+
+  checkPassword(){
+    if(this.pw1 == this.pw2){
+      this.samePw = true;
+    }else{
+      this.samePw = false;
     }
   }
 
