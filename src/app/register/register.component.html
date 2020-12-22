@@ -3,7 +3,7 @@
 
         <mat-toolbar color="primary">Register</mat-toolbar>
 
-        <form fxLayoutAlign="stretch" fxLayout="column" class="login-form" [formGroup]="formGroup" (ngSubmit)="registerProcess()">  
+        <form fxLayoutAlign="stretch" fxLayout="column"  [formGroup]="formGroup" (ngSubmit)="registerProcess()">  
 
             <mat-form-field>
                 <mat-label>Name</mat-label>
@@ -12,7 +12,7 @@
 
             <mat-form-field>
                 <mat-label>Password</mat-label>
-                <input [(ngModel)]="pw1" matInput type="password" placeholder="Password" formControlName="pass1" (change)="checkPassword()">
+                <input [(ngModel)]="pw1" matInput type="password" placeholder="Password" formControlName="password" (change)="checkPassword()">
             </mat-form-field>
             <mat-form-field >
                 <mat-label>Repeat Password</mat-label>
@@ -24,7 +24,7 @@
                 <input matInput type="email" placeholder="E-Mail" formControlName="email">
             </mat-form-field>
 
-            <button mat-raised-button href="" routerLink="/login" type="submit">Register</button>
+            <button mat-raised-button type="submit">Register</button>
           </form>
           
     </mat-card>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RegisterService } from '../register.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -11,9 +12,12 @@ export class RegisterComponent implements OnInit {
   formGroup: FormGroup;
   pw1: Text;
   pw2: Text;
-  samePw: Boolean;
+  samePw: boolean;
 
-  constructor(private registerService: RegisterService) { }
+  constructor(
+    private registerService: RegisterService,
+    public router: Router
+    ) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -25,7 +29,7 @@ export class RegisterComponent implements OnInit {
     this.formGroup=new FormGroup({
       email: new FormControl('', [Validators.required]),
       name: new FormControl('', [Validators.required]),  
-      pass1: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
       pass2: new FormControl('', [Validators.required])
     })
   }
@@ -35,13 +39,20 @@ export class RegisterComponent implements OnInit {
   registerProcess(){
     if(this.formGroup.valid){
       this.registerService.register(this.formGroup.value).subscribe(result=>{
+       
+        this.router.navigate(['']);
+        /*
         if(result.success){
           console.log(result);
           alert(result.message);  
         }else {
           alert(result.message);
         }
-      })
+        */
+      }), (error)=> {
+        console.log(error)
+        alert("Registration failed");
+    }
     }
   }
 

@@ -5,21 +5,33 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
+
+import {HttpClientModule} from '@angular/common/http';
+
+//Design imports: 
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import {HttpClientModule} from '@angular/common/http';
+import {MatButtonModule} from '@angular/material/button';
+
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SaldoComponent } from './saldo/saldo.component';
 import { RegisterComponent } from './register/register.component';
+import { AddSpendingComponent } from './add-spending/add-spending.component';
+
+import { CommonModule, CurrencyPipe} from '@angular/common';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    SaldoComponent,
     RegisterComponent,
+    AddSpendingComponent
   ],
   imports: [
     BrowserModule,
@@ -32,10 +44,12 @@ import { RegisterComponent } from './register/register.component';
     MatToolbarModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatButtonToggleModule
 
   ],
-  providers: [],
+  providers: [CurrencyPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
