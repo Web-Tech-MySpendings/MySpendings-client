@@ -12,7 +12,7 @@ export class AuthServiceService {
   constructor(private http:HttpClient) { }
 
   login(data):Observable<any>{
-    return this.http.post(API.baseUrl+'/login',data);  //login to local server from ex7.1
+    return this.http.post(API.baseUrl+'/login',data, {observe: 'response'});  //login to local server from ex7.1
   }
   
 }

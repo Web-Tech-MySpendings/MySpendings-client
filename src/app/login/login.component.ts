@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthServiceService } from '../auth-service.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,17 +11,21 @@ import { AuthServiceService } from '../auth-service.service';
 export class LoginComponent implements OnInit {
   formGroup: FormGroup;
 
-  constructor(private authService: AuthServiceService) {   }
+  constructor(
+    private authService: AuthServiceService, 
+    public router: Router) 
+    {   }
 
   ngOnInit(): void {
     this.initForm();
+    
   }
 
   //Body of http-request:
   initForm(){
     this.formGroup=new FormGroup({
       email: new FormControl('', [Validators.required]),  
-      pass: new FormControl('', [Validators.required])
+      password: new FormControl('', [Validators.required])
     })
   }
   
@@ -28,13 +33,15 @@ export class LoginComponent implements OnInit {
     console.log("try to login!!!!!!!!!!!!")
     if(this.formGroup.valid){
       this.authService.login(this.formGroup.value).subscribe(result=>{
-        if(result.success){
-          console.log(result);
-          alert(result.message);  //for now just show response 
-        }else {
-          alert(result.message);
-        }
-      })
+        console.log(result)
+
+        this.router.navigate(['saldo']);
+
+      }), (error)=> {
+          console.log(error)
+          alert("Wrong Password");
+      }
+      }
     }
-  }
+  
 }
