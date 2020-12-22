@@ -1,0 +1,28 @@
+.addSpending{
+    font-size: 3em;
+}
+mat-form-field{
+    width: 100%;
+    text-align: center;
+}
+
+.wrapper{
+    text-align: left;
+}
+
+.newSpending{
+    float: left;
+}
+
+input{
+    width: min-content;
+}
+
+mat-card{
+    width: 100%;
+    text-align: center;
+}
+
+mat-button-toggle{
+    min-width: 10em;
+}

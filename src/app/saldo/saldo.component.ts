@@ -9,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SaldoComponent implements OnInit {
 
+  view: boolean = true; //used with *ngIf="view" in html to hide elements when entering a new spending 
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  addSpending(){
+    console.log("add spending!")
+    this.view=false;
   }
 
 }

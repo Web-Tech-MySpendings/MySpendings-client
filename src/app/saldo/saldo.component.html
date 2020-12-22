@@ -3,18 +3,23 @@
     <mat-toolbar color="primary">
         <span>mySpendings</span>
     </mat-toolbar>
-    <mat-card class="balance">
+
+    <!--Maybee the elements below should be a own component-->
+    <mat-card class="balance" *ngIf="view">
+        <span>€ </span>
         <span>0.00</span>
-        <span> €</span>
     </mat-card>
 
-    <mat-card class="diagram">
+    <mat-card class="diagram" *ngIf="view">
         <p>This is space for a diagramm</p>
     </mat-card>
 
 
-    <mat-card class="add">
-        <button mat-fab color="primary" id="btn_plus">+</button> 
+    <mat-card class="add" *ngIf="view">
+        <button mat-fab color="primary" id="btn_plus" (click)="addSpending()">+</button> 
     </mat-card>
 
 </div>
+
+<!--Only show this component when entering a new spending-->
+<app-add-spending *ngIf="!view"></app-add-spending>

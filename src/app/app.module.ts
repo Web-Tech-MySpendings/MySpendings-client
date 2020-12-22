@@ -19,6 +19,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SaldoComponent } from './saldo/saldo.component';
 import { RegisterComponent } from './register/register.component';
+import { AddSpendingComponent } from './add-spending/add-spending.component';
+
+import { CommonModule, CurrencyPipe} from '@angular/common';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 
 @NgModule({
@@ -26,7 +30,8 @@ import { RegisterComponent } from './register/register.component';
     AppComponent,
     LoginComponent,
     SaldoComponent,
-    RegisterComponent
+    RegisterComponent,
+    AddSpendingComponent
   ],
   imports: [
     BrowserModule,
@@ -40,10 +45,11 @@ import { RegisterComponent } from './register/register.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatButtonToggleModule
 
   ],
-  providers: [],
+  providers: [CurrencyPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,12 +2,15 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { SaldoComponent } from './saldo/saldo.component';
+import { AddSpendingComponent } from './add-spending/add-spending.component';
 
 const routes: Routes = [
   {path:'', component: LoginComponent},
   {path:'register', component: RegisterComponent},
-  {path:'login', component: LoginComponent}
-  {path:'saldo', component: SaldoComponent}
+  {path:'login', component: LoginComponent},
+  {path:'saldo', component: SaldoComponent},
+  {path: 'add', component: AddSpendingComponent}  //just for test purpose 
 ];
 
 @NgModule({
