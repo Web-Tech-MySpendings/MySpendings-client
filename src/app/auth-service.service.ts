@@ -14,5 +14,9 @@ export class AuthServiceService {
   login(data):Observable<any>{
     return this.http.post(API.baseUrl+'/login',data, {observe: 'response'});  //login to local server from ex7.1
   }
+
+  register(data):Observable<any>{
+    return this.http.post(API.baseUrl+'/register',data, {observe: 'response'});
+  }
   
 }

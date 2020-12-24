@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { RegisterService } from '../register.service';
+import { AuthServiceService } from '../auth-service.service';
 import {Router} from '@angular/router';
 
 @Component({
@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit {
   samePw: boolean;
 
   constructor(
-    private registerService: RegisterService,
+    private authService: AuthServiceService,
     public router: Router
     ) { }
 
@@ -38,7 +38,7 @@ export class RegisterComponent implements OnInit {
   //TODO: remove if/else?
   registerProcess(){
     if(this.formGroup.valid){
-      this.registerService.register(this.formGroup.value).subscribe(result=>{
+      this.authService.register(this.formGroup.value).subscribe(result=>{
        
         this.router.navigate(['']);
         /*
