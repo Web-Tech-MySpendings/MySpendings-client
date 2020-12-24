@@ -4,12 +4,16 @@
         <span>mySpendings</span>
     </mat-toolbar>
 
-    <!--Maybee the elements below should be a own component-->
-    <mat-card class="balance" *ngIf="view">
-        <span>€ </span>
-        <span>0.00</span>
-    </mat-card>
 
+    <!--Maybee the elements below should be a own component-->
+    <div>
+        <mat-card class="balance" *ngIf="view">
+            <span id="span1">€ </span>
+            <span>0.00</span>
+            <button mat-flat-button color="primary" id="btn_logout" (click)="logout()">Logout</button> 
+        </mat-card>
+        
+    </div>
     <mat-card class="diagram" *ngIf="view">
         <p>This is space for a diagramm</p>
     </mat-card>

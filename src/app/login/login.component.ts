@@ -44,6 +44,8 @@ export class LoginComponent implements OnInit {
         //Cookies: https://www.npmjs.com/package/ngx-cookie-service
         this.cookieService.set( 'token', result.body.token   ); 
         this.cookieService.set( 'refreshToken', result.body.refreshToken ); 
+        
+
         this.router.navigate(['saldo']);
 
       }), (error)=> {

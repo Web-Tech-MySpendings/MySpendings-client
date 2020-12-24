@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -12,7 +12,9 @@ export class SaldoComponent implements OnInit {
 
   view: boolean = true; //used with *ngIf="view" in html to hide elements when entering a new spending 
 
-  constructor(private cookieService: CookieService) { }
+  constructor(
+    private cookieService: CookieService,
+    public router: Router) { }
 
   ngOnInit(): void {
   }
@@ -23,6 +25,13 @@ export class SaldoComponent implements OnInit {
     console.log(this.cookieService.get("token"));
     console.log(this.cookieService.get("refreshToken"));
 
+  }
+
+  logout(){
+    console.log("logout")
+    this.cookieService.delete('token');
+    this.cookieService.delete('refreshToken');
+    this.router.navigate(['login']);
   }
 
 }

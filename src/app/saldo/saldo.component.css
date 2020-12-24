@@ -2,6 +2,14 @@
     margin: auto;
 }
 
+#btn_logout{
+   float: right;
+    
+}
+#span1{
+    margin-left: 70px;
+}
+
 .balance {
     text-align: center;
     font-size: 3em;
