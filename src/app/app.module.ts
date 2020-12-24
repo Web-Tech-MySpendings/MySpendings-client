@@ -23,6 +23,7 @@ import { AddSpendingComponent } from './add-spending/add-spending.component';
 
 import { CommonModule, CurrencyPipe} from '@angular/common';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @NgModule({
@@ -49,7 +50,16 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     MatButtonToggleModule
 
   ],
-  providers: [CurrencyPipe],
-  bootstrap: [AppComponent]
+  providers: [
+    CurrencyPipe,
+    CookieService 
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
-export class AppModule { }
+export class AppModule {
+
+  
+
+}
