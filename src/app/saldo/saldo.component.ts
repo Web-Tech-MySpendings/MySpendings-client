@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 
 
@@ -11,7 +12,7 @@ export class SaldoComponent implements OnInit {
 
   view: boolean = true; //used with *ngIf="view" in html to hide elements when entering a new spending 
 
-  constructor() { }
+  constructor(private cookieService: CookieService) { }
 
   ngOnInit(): void {
   }
@@ -19,6 +20,9 @@ export class SaldoComponent implements OnInit {
   addSpending(){
     console.log("add spending!")
     this.view=false;
+    console.log(this.cookieService.get("token"));
+    console.log(this.cookieService.get("refreshToken"));
+
   }
 
 }
