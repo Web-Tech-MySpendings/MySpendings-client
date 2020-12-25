@@ -1,9 +1,16 @@
+/*Disable scrolling*/
+body.modal-open {
+    position: fixed;
+    overflow: hidden;
+}
+
 .mat-toolbar>span{
     margin: auto;
 }
 
 #btn_logout{
    float: right;
+   margin-bottom: 10px;
     
 }
 #span1{
@@ -15,11 +22,16 @@
     font-size: 3em;
 }
 
-.diagram{
-    padding-top: 180px;
-    padding-bottom: 200px;
+
+table{
     text-align: center;
-  
+    width: 30%;
+    margin: auto;
+    height: 10px;
+}
+
+td {
+    height: 3em;
 }
 
 .add{
