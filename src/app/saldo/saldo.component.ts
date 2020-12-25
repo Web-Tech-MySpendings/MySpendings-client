@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { ResourceService } from '../resource.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { ResourceService } from '../resource.service';
 export class SaldoComponent implements OnInit {
 
   view: boolean = true; //used with *ngIf="view" in html to hide elements when entering a new spending 
-  
+
   //for Table
   elements: any = [];
   headElements = ['Value', 'Spending', 'Date', 'Category'];
@@ -20,21 +20,21 @@ export class SaldoComponent implements OnInit {
     private cookieService: CookieService,
     public router: Router,
     private resourceService: ResourceService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
-   this.loadTable();
+    this.loadTable();
   }
 
-  addSpending(){
+  addSpending() {
     console.log("add spending!")
-    this.view=false;
-    console.log(this.cookieService.get("token"));
-    console.log(this.cookieService.get("refreshToken"));
+    this.view = false;
+    //console.log(this.cookieService.get("token"));
+    //console.log(this.cookieService.get("refreshToken"));
 
   }
 
-  logout(){
+  logout() {
     console.log("logout")
     this.cookieService.delete('token');
     this.cookieService.delete('refreshToken');
@@ -42,9 +42,9 @@ export class SaldoComponent implements OnInit {
   }
 
   //TODO: get this data from server
-  private loadTable(){
+  private loadTable() {
 
-    this.resourceService.getAllSpendings().subscribe(result=>{
+    this.resourceService.getAllSpendings().subscribe(result => {
 
       console.log(result);
       let data: any = result.body;
@@ -55,11 +55,10 @@ export class SaldoComponent implements OnInit {
 
       for (let i = 0; i < data.length; i++) {
         this.elements.push({
-          value: data[i].value, 
-          spanding: data[i].sid, 
-          date: data[i].date, 
-          category:
-            'Category ' + i
+          value: data[i].value,
+          spanding: data[i].sid,
+          date: data[i].date,
+          category: data[i].type,
         });
       }
     })
