@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpRequest, HttpResponse } from '@angular/common/http';
-import { Observable, pipe } from 'rxjs'; 
+import { Observable, pipe } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { API } from './../environments/environment';
 import { CookieService } from 'ngx-cookie-service';
@@ -9,61 +9,60 @@ import { CookieService } from 'ngx-cookie-service';
   providedIn: 'root'
 })
 export class ResourceService {
-  
 
-  private tokenRefresh(callbackFunction):void {
-    this.http.get(API.baseUrl+'/toke', {
+
+  private tokenRefresh(callbackFunction): void {
+    this.http.get(API.baseUrl + '/token', {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': this.cookieService.get("refreshToken")      
+        'Authorization': this.cookieService.get("refreshToken")
       }),
       observe: "response"
-    } ).subscribe(result=>{
-      if(result.status===200){
-        this.cookieService.set( 'token', result.body['token'] ); 
+    }).subscribe(result => {
+      if (result.status === 200) {
+        this.cookieService.set('token', result.body['token']);
+        this.cookieService.set('refreshToken', result.body['refreshToken']);
         callbackFunction();
       }
     })
-
   }
 
-  
-  constructor(
-    private http:HttpClient,
-    private cookieService: CookieService
-    ) { }
+  private checkForInvalidAccess(response): boolean {
+    if (response.status === 401) {
+      return true;
+    }
+    return false;
+  }
 
-  getAllSpendings():Observable<any>{
+  constructor(
+    private http: HttpClient,
+    private cookieService: CookieService
+  ) { }
+
+  getAllSpendings(): Observable<any> {
 
     //tokenRefresh();
 
-    return this.http.get(API.baseUrl+'/spendings', {
-    
+    return this.http.get(API.baseUrl + '/spendings', {
+
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': this.cookieService.get("token")      
+        'Authorization': this.cookieService.get("token")
       }),
       observe: "response"
 
     }).pipe(
-      map(response =>{
-        if(this.checkForInvalidAccess(response)){
-          this.tokenRefresh(this.getAllSpendings)
+      map(response => {
+        if (this.checkForInvalidAccess(response)) {
+          this.tokenRefresh(this.getAllSpendings);
         }
-        else{
+        else {
           return response;
         }
       })
-      
-    ); 
-     
-  }
 
-  private checkForInvalidAccess(response): boolean{
-    if(response.status===401){
-      return true;
-    }
-    return false;
+    );
+
   }
 
 }
