@@ -13,6 +13,8 @@ export class ViewComponent implements OnInit {
 //for Table
 elements: any = [];
 headElements = ['Value', 'Date', 'Category', 'Comment'];
+//total value
+total: number = 0;
 
 constructor(
   private cookieService: CookieService,
@@ -44,8 +46,9 @@ private loadTable() {
 
     console.log(result);
     let data: any = result.body;
-
+    this.total = 0;
     for (let i = 0; i < data.length; i++) {
+      this.total+=data[i].value;
       this.elements.push({
         value: data[i].value,
         spending: data[i].sid,

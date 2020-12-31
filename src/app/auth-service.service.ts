@@ -20,3 +20,13 @@ export class AuthServiceService {
   }
   
 }
+
+
+/*
+    alter/insert        put, also einfügen von einem spending. im body den value das date (und category / comment -> optional);
+    alter/delete        delete, löschen von spending         
+    alter/update        patch, bearbeiten von spending
+    /spendings          get, um alle spendings zu erhalten 
+    /spendings/filter   get, nach category, value und date 
+
+*/
