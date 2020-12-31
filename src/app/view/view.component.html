@@ -1,30 +1,70 @@
 <app-saldo></app-saldo>
 
-<mat-card class="balance">
-    <span id="span1">€ {{total}} </span>
-    <!-- <span id="span2">0.00</span> -->
-    <button mat-flat-button color="primary" id="btn_logout" (click)="logout()">Logout</button> 
-</mat-card>
+<div class="body">
+
+  <mat-card class="filter">
+    <mat-button-toggle-group name="filter" aria-label="Filter" (change)="changeFilter($event.value)">
+      <mat-button-toggle class="filter-btn" value="all">All</mat-button-toggle>
+      <mat-button-toggle class="filter-btn" value="month">Month</mat-button-toggle>
+      <mat-button-toggle class="filter-btn" value="filter">Filter</mat-button-toggle>
+    </mat-button-toggle-group>
+  </mat-card>
+
+  <mat-card class="filter-detail" *ngIf="showDetail">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Enter a date range</mat-label>
+      <mat-date-range-input [rangePicker]="picker">
+        <input matStartDate placeholder="Start date" (dateInput)="addEvent('start', $event)">
+        <input matEndDate placeholder="End date"     (dateInput)="addEvent('end', $event)">
+      </mat-date-range-input>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+
+
+    <!--https://www.npmjs.com/package/ng5-slider-->
+    <div (mouseup)="updateTable('filter')">
+      <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"></ng5-slider>
+    </div>
+      
+    <div class="filterCategory">
+      <button mat-raised-button id="0" class="filterCategory" (click)="SetCategory(0)" [ngClass]="{'selected' : filterCategory[0]}">General</button>
+      <button mat-raised-button id="1" class="filterCategory" (click)="SetCategory(1)" [ngClass]="{'selected' : filterCategory[1]}">Food</button>
+      <button mat-raised-button id="2" class="filterCategory" (click)="SetCategory(2)" [ngClass]="{'selected' : filterCategory[2]}">Mobility</button>
+      <button mat-raised-button id="3" class="filterCategory" (click)="SetCategory(3)" [ngClass]="{'selected' : filterCategory[3]}">Education</button>
+      <button mat-raised-button id="4" class="filterCategory" (click)="SetCategory(4)" [ngClass]="{'selected' : filterCategory[4]}">Travel</button>
+      <button mat-raised-button id="5" class="filterCategory" (click)="SetCategory(5)" [ngClass]="{'selected' : filterCategory[5]}">Entertainment</button>
+    </div>
+
+  </mat-card>
+
+  <mat-card class="balance">
+    € {{total}}
+    <!--<button mat-flat-button color="primary" id="btn_logout" (click)="logout()">Logout</button> -->
+  </mat-card>
     
-<mat-card class="diagram">
-    <table mat-table maxHeight="200" bordered="true">
-        <thead>
-          <tr>
-            <th *ngFor="let head of headElements; let i = index" scope="col">{{head}}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let el of elements; let i = index">
-            <th scope="row">€ {{el.value}}</th>
-            <td>{{el.date}}</td>
-            <td>{{el.category}}</td>
-            <td>{{el.comment}}</td>
+  <mat-card class="table">
+      <table mat-table maxHeight="200" bordered="true">
+          <thead>
+            <tr>
+              <th *ngFor="let head of headElements; let i = index" scope="col">{{head}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let el of elements; let i = index">
+              <th scope="row">€ {{el.value}}</th>
+              <td>{{el.date}}</td>
+              <td>{{el.category}}</td>
+              <td>{{el.comment}}</td>
 
-          </tr>
-        </tbody>
-      </table>
-</mat-card>
+            </tr>
+          </tbody>
+        </table>
+  </mat-card>
 
-<mat-card class="add">
-    <button mat-fab color="primary" id="btn_plus" (click)="addSpending()">+</button> 
-</mat-card>
+  <mat-card class="add">
+      <button mat-fab color="primary" id="btn_plus" (click)="addSpending()">+</button> 
+  </mat-card>
+
+</div>

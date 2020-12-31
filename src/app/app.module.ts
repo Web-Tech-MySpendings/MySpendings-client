@@ -15,6 +15,10 @@ import {MatCardModule} from '@angular/material/card';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { Ng5SliderModule } from 'ng5-slider';
+
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SaldoComponent } from './saldo/saldo.component';
@@ -51,7 +55,10 @@ import { ViewComponent } from './view/view.component';
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    Ng5SliderModule 
 
   ],
   providers: [

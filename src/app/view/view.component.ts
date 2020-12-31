@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { ResourceService } from '../resource.service';
+import { Options, LabelType } from 'ng5-slider';
+import {MatDatepickerInputEvent} from '@angular/material/datepicker';
+
 
 @Component({
   selector: 'app-view',
@@ -10,55 +13,159 @@ import { ResourceService } from '../resource.service';
 })
 export class ViewComponent implements OnInit {
 
-//for Table
-elements: any = [];
-headElements = ['Value', 'Date', 'Category', 'Comment'];
-//total value
-total: number = 0;
+  //for Table
+  elements: any = [];
+  headElements = ['Value', 'Date', 'Category', 'Comment'];
 
-constructor(
-  private cookieService: CookieService,
-  public router: Router,
-  private resourceService: ResourceService
-) { }
+  //total value
+  total: number = 0;
 
-ngOnInit(): void {
-  this.loadTable();
-}
+  showDetail: boolean=false; 
 
-addSpending() {
-  console.log("add spending!")
-  this.router.navigate(['add']);
+  constructor(
+    private cookieService: CookieService,
+    public router: Router,
+    private resourceService: ResourceService
+  ) { }
 
-}
+  ngOnInit(): void {
+    this.loadAll();
+  }
 
-logout() {
-  console.log("logout")
-  this.cookieService.delete('token');
-  this.cookieService.delete('refreshToken');
-  this.router.navigate(['login']);
-}
+  addSpending() {
+    console.log("add spending!")
+    this.router.navigate(['add']);
+  }
 
-//TODO: get this data from server
-private loadTable() {
+  logout() {
+    console.log("logout")
+    this.cookieService.delete('token');
+    this.cookieService.delete('refreshToken');
+    this.router.navigate(['login']);
+  }
 
-  this.resourceService.getAllSpendings().subscribe(result => {
+  //Variables for filter request: 
+  startDate: Date;
+  endDate: Date;
+  minValue: number = 100;
+  maxValue: number = 400;
 
-    console.log(result);
-    let data: any = result.body;
-    this.total = 0;
-    for (let i = 0; i < data.length; i++) {
-      this.total+=data[i].value;
-      this.elements.push({
-        value: data[i].value,
-        spending: data[i].sid,
-        date: data[i].date.substring(0,10),
-        category: data[i].type,
-        comment: data[i].comment
-      });
+  filterCategory: boolean[] = [true,true,true,true,true,true]; 
+
+  changeFilter(value){
+    if(value==="filter"){
+      this.showDetail=true;
+    }else{
+      this.showDetail=false;
     }
-  })
+    this.updateTable(value); 
+  }
 
-}
+  //out of unknown reasons it is not possible to rename this function 
+  //this addEvent function is executed when the dateInput changes 
+  addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
+
+    if(type==='start'){
+      this.startDate=event.value; 
+
+    }else if(type==='end'){
+      this.endDate=event.value; 
+
+      if(this.startDate!==null && this.endDate!==null){
+      this.updateTable("filter");
+      }
+
+    }
+  }
+
+
+  //for Slide-Bar 
+
+  options: Options = {
+    floor: 0,
+    ceil: 500,  //TODO: get max value 
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:       
+          return 'min €' + value;
+
+        case LabelType.High:
+          return 'max €' + value;
+        default:
+          
+        return '€' + value;
+      }
+    }
+  };
+
+
+  SetCategory(btn_ID){
+    this.filterCategory[btn_ID]=!this.filterCategory[btn_ID];
+    this.updateTable("filter")
+  }
+
+  updateTable(type){
+    
+    switch(type){
+      case "all": 
+          this.loadAll();
+        break;
+
+      case "month": 
+        console.log("Send request for current month here"); 
+        break;
+
+      case "filter": 
+      
+      let httpBoddy= new Object({
+            "startDate": this.startDate,  //TODO: correct format! 
+            "endDate": this.endDate,
+            "minVale": this.minValue,
+            "macValue": this.maxValue,
+            "categories": this.filterCategory
+      });
+    
+      console.log(httpBoddy);
+
+
+
+
+
+      break; 
+
+      default: 
+        console.log("something went wrong when updating the tabe")
+
+    }
+
+  }
+
+  
+
+
+  private loadAll() {
+    this.resourceService.getAllSpendings().subscribe(result => {
+      
+      console.log(result);
+      let data: any = result.body;
+      this.total = 0;
+      for (let i = 0; i < data.length; i++) {
+        this.total+=data[i].value;
+        this.elements.push({
+          value: data[i].value,
+          spending: data[i].sid,
+          date: data[i].date.substring(0,10),
+          category: data[i].type,
+          comment: data[i].comment
+        });
+      }
+
+    })
+
+  }
+
+  private loadFiltered(body: Object){
+
+  }
 
 }
