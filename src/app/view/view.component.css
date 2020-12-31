@@ -1,0 +1,36 @@
+/*Disable scrolling*/
+body.modal-open {
+    position: fixed;
+    overflow: hidden;
+}
+
+
+#btn_logout{
+   float: right;
+   margin-bottom: 10px;
+    
+}
+#span1{
+    margin-left: 70px;
+}
+
+.balance {
+    text-align: center;
+    font-size: 3em;
+}
+
+
+table{
+    text-align: center;
+    width: 30%;
+    margin: auto;
+    height: 10px;
+}
+
+td {
+    height: 3em;
+}
+
+.add{
+    text-align: center;
+}

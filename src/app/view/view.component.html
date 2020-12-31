@@ -1,0 +1,30 @@
+<app-saldo></app-saldo>
+
+<mat-card class="balance">
+    <span id="span1">€ </span>
+    <span>0.00</span>
+    <button mat-flat-button color="primary" id="btn_logout" (click)="logout()">Logout</button> 
+</mat-card>
+    
+<mat-card class="diagram">
+    <table mat-table maxHeight="200" bordered="true">
+        <thead>
+          <tr>
+            <th *ngFor="let head of headElements; let i = index" scope="col">{{head}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let el of elements; let i = index">
+            <th scope="row">€ {{el.value}}</th>
+            <td>{{el.date}}</td>
+            <td>{{el.category}}</td>
+            <td>{{el.comment}}</td>
+
+          </tr>
+        </tbody>
+      </table>
+</mat-card>
+
+<mat-card class="add">
+    <button mat-fab color="primary" id="btn_plus" (click)="addSpending()">+</button> 
+</mat-card>

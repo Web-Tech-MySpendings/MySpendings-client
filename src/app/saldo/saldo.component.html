@@ -3,39 +3,5 @@
     <mat-toolbar color="primary">
         <span>mySpendings</span>
     </mat-toolbar>
-
-
-    <!--Maybee the elements below should be a own component-->
-    <mat-card class="balance" *ngIf="view">
-        <span id="span1">€ </span>
-        <span>0.00</span>
-        <button mat-flat-button color="primary" id="btn_logout" (click)="logout()">Logout</button> 
-    </mat-card>
-        
-    <mat-card class="diagram" *ngIf="view">
-        <table mdbTable mdbTableScroll scrollY="true" maxHeight="200" bordered="true">
-            <thead>
-              <tr>
-                <th *ngFor="let head of headElements; let i = index" scope="col">{{head}}</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let el of elements; let i = index">
-                <th scope="row">{{el.value}}</th>
-                <td>{{el.spanding}}</td>
-                <td>{{el.date}}</td>
-                <td>{{el.category}}</td>
-              </tr>
-            </tbody>
-          </table>
-    </mat-card>
-
-
-    <mat-card class="add" *ngIf="view">
-        <button mat-fab color="primary" id="btn_plus" (click)="addSpending()">+</button> 
-    </mat-card>
-
 </div>
 
-<!--Only show this component when entering a new spending-->
-<app-add-spending *ngIf="!view"></app-add-spending>

@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
         this.cookieService.set( 'refreshToken', result.body.refreshToken ); 
         
 
-        this.router.navigate(['saldo']);
+        this.router.navigate(['view']);
 
       }), (error)=> {
           console.log(error)

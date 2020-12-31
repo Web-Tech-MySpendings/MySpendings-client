@@ -24,6 +24,9 @@ import { AddSpendingComponent } from './add-spending/add-spending.component';
 import { CommonModule, CurrencyPipe} from '@angular/common';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { CookieService } from 'ngx-cookie-service';
+import { ViewComponent } from './view/view.component';
+
+
 
 
 @NgModule({
@@ -32,7 +35,8 @@ import { CookieService } from 'ngx-cookie-service';
     LoginComponent,
     SaldoComponent,
     RegisterComponent,
-    AddSpendingComponent
+    AddSpendingComponent,
+    ViewComponent
   ],
   imports: [
     BrowserModule,

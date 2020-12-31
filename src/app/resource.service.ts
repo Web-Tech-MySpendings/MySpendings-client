@@ -14,7 +14,7 @@ export class ResourceService {
   private tokenRefresh(callbackFunction): void {
     this.http.get(API.baseUrl + '/token', {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json',  
         'Authorization': this.cookieService.get("refreshToken")
       }),
       observe: "response"
