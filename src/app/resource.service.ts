@@ -41,8 +41,6 @@ export class ResourceService {
 
   getAllSpendings(): Observable<any> {
 
-    //tokenRefresh();
-
     return this.http.get(API.baseUrl + '/spendings', {
 
       headers: new HttpHeaders({
@@ -64,4 +62,16 @@ export class ResourceService {
     );
     
   }
+
+  getFilteredSpendings(body: Object): Observable<any>{
+
+    //Zusammen mit fabian fertig stellen 
+      //Wie soll body genau ausschauen? 
+      //Wie wurde das mit refresh-token gefixed? 
+      
+      //REST Convention:  put für Update/Replace
+    return null; 
+  }
+
+
 }

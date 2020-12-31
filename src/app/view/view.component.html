@@ -3,10 +3,10 @@
 <div class="body">
 
   <mat-card class="filter">
-    <mat-button-toggle-group name="filter" aria-label="Filter" (change)="changeFilter($event.value)">
-      <mat-button-toggle class="filter-btn" value="all">All</mat-button-toggle>
-      <mat-button-toggle class="filter-btn" value="month">Month</mat-button-toggle>
-      <mat-button-toggle class="filter-btn" value="filter">Filter</mat-button-toggle>
+    <mat-button-toggle-group name="filter" aria-label="Filter">
+      <mat-button-toggle class="filter-btn" value="all"   (change)="changeFilter($event.value)">All</mat-button-toggle>
+      <mat-button-toggle class="filter-btn" value="month" (change)="changeFilter($event.value)">Month</mat-button-toggle>
+      <mat-button-toggle class="filter-btn" value="filter"(change)="changeFilter($event.value)">Filter</mat-button-toggle>
     </mat-button-toggle-group>
   </mat-card>
 

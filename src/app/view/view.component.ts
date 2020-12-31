@@ -52,13 +52,22 @@ export class ViewComponent implements OnInit {
 
   filterCategory: boolean[] = [true,true,true,true,true,true]; 
 
+
+  activeFilter:String ="month";
   changeFilter(value){
     if(value==="filter"){
-      this.showDetail=true;
+      this.showDetail=!this.showDetail;
     }else{
       this.showDetail=false;
     }
-    this.updateTable(value); 
+
+    //To not send same request again
+    if(value!==this.activeFilter){
+      this.updateTable(value); 
+      this.activeFilter=value;
+    }
+
+   
   }
 
   //out of unknown reasons it is not possible to rename this function 
@@ -145,27 +154,31 @@ export class ViewComponent implements OnInit {
 
   private loadAll() {
     this.resourceService.getAllSpendings().subscribe(result => {
-      
-      console.log(result);
-      let data: any = result.body;
-      this.total = 0;
-      for (let i = 0; i < data.length; i++) {
-        this.total+=data[i].value;
-        this.elements.push({
-          value: data[i].value,
-          spending: data[i].sid,
-          date: data[i].date.substring(0,10),
-          category: data[i].type,
-          comment: data[i].comment
-        });
-      }
-
+      this.createTable(result);
     })
-
   }
 
   private loadFiltered(body: Object){
+    this.resourceService.getAllSpendings().subscribe(result => {     //TODO: complete getFilteredSpendings
+    //this.resourceService.getFilteredSpendings(body).subscribe(result =>{    
+        this.createTable(result);
+      })
+  }
 
+  private createTable(result){
+    console.log(result);
+    let data: any = result.body;
+    this.total = 0;
+    for (let i = 0; i < data.length; i++) {
+      this.total+=data[i].value;
+      this.elements.push({
+        value: data[i].value,
+        spending: data[i].sid,
+        date: data[i].date.substring(0,10),
+        category: data[i].type,
+        comment: data[i].comment
+      });
+    }
   }
 
 }
