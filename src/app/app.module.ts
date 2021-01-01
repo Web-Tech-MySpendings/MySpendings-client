@@ -1,19 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-//Design imports: 
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatCardModule} from '@angular/material/card';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatButtonModule} from '@angular/material/button';
+//Design imports:
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuItem, MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
 
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -25,13 +27,11 @@ import { SaldoComponent } from './saldo/saldo.component';
 import { RegisterComponent } from './register/register.component';
 import { AddSpendingComponent } from './add-spending/add-spending.component';
 
-import { CommonModule, CurrencyPipe} from '@angular/common';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { CommonModule, CurrencyPipe } from '@angular/common';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { CookieService } from 'ngx-cookie-service';
 import { ViewComponent } from './view/view.component';
-
-
-
+import { Interceptor } from './interceptor.interceptor';
 
 @NgModule({
   declarations: [
@@ -40,12 +40,12 @@ import { ViewComponent } from './view/view.component';
     SaldoComponent,
     RegisterComponent,
     AddSpendingComponent,
-    ViewComponent
+    ViewComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
-    NoopAnimationsModule,
     FlexLayoutModule,
     MatFormFieldModule,
     MatInputModule,
@@ -56,6 +56,10 @@ import { ViewComponent } from './view/view.component';
     ReactiveFormsModule,
     MatButtonModule,
     MatButtonToggleModule,
+
+    MatMenuModule,
+    MatButtonToggleModule,
+    MatIconModule,
     MatDatepickerModule,
     MatNativeDateModule,
     Ng5SliderModule 
@@ -63,14 +67,13 @@ import { ViewComponent } from './view/view.component';
   ],
   providers: [
     CurrencyPipe,
-    CookieService 
+    CookieService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: Interceptor,
+      multi: true,
+    },
   ],
-  bootstrap: [
-    AppComponent
-  ]
+  bootstrap: [AppComponent],
 })
-export class AppModule {
-
-  
-
-}
+export class AppModule {}

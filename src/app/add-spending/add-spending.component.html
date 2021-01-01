@@ -1,22 +1,19 @@
-
-
 <mat-card class="addSpending">
-        <mat-form-field >
-            <mat-label>new Spending</mat-label>
-            <input matInput (blur)="transformAmount($event)" [(ngModel)]="formattedAmount"  placeholder="0.00" type="text" value="0.00">
-        </mat-form-field>
+  <mat-form-field>
+    <mat-label>new Spending</mat-label>
+    <input matInput (blur)="transformAmount($event)" [(ngModel)]="formattedAmount" placeholder="0.00" type="text"
+      value="0.00">
+  </mat-form-field>
 </mat-card>
 
 
 <mat-card class="categories">
-    <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-        <mat-button-toggle value="Genral">General</mat-button-toggle>
-        <mat-button-toggle value="Food">Food</mat-button-toggle>
-        <mat-button-toggle value="Mobility">Mobility</mat-button-toggle>
-        <mat-button-toggle value="Education">Education</mat-button-toggle>
-        <mat-button-toggle value="Travel">Travel</mat-button-toggle>
-        <mat-button-toggle value="Entertainment">Entertainment</mat-button-toggle>
-      </mat-button-toggle-group>      
+  <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+    <mat-button-toggle value="Genral">General</mat-button-toggle>
+    <mat-button-toggle value="Food">Food</mat-button-toggle>
+    <mat-button-toggle value="Mobility">Mobility</mat-button-toggle>
+    <mat-button-toggle value="Education">Education</mat-button-toggle>
+    <mat-button-toggle value="Travel">Travel</mat-button-toggle>
+    <mat-button-toggle value="Entertainment">Entertainment</mat-button-toggle>
+  </mat-button-toggle-group>
 </mat-card>
-
-

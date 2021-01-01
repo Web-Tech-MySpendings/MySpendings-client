@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { ResourceService } from '../resource.service';
+import {MatMenuModule} from '@angular/material/menu';
 
 @Component({
   selector: 'app-saldo',
@@ -10,12 +11,34 @@ import { ResourceService } from '../resource.service';
 })
 export class SaldoComponent implements OnInit {
 
+  matMenu: MatMenuModule;
 
   constructor(
-  ) { }
+    private router: Router,
+    private cookieService: CookieService
+  ) {}
 
   ngOnInit(): void {
+  }
+
+  logout() {
+  console.log("logout")
+  this.cookieService.delete('token');
+  this.cookieService.delete('refreshToken');
+  this.router.navigate(['login']);
+}
+
+  charts(){
+
+  }
+
+  profile(){
+
+  }
+
+  home(){
     
   }
 
+  
 }

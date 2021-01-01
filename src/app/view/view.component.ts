@@ -158,6 +158,9 @@ export class ViewComponent implements OnInit {
     })
   }
 
+
+  this.resourceService.getAllSpendings().subscribe(result => {
+
   private loadFiltered(body: Object){
     this.resourceService.getAllSpendings().subscribe(result => {     //TODO: complete getFilteredSpendings
     //this.resourceService.getFilteredSpendings(body).subscribe(result =>{    

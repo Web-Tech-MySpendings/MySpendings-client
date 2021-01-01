@@ -1,22 +1,24 @@
 <div fxLayoutAlign="center center" fxFlexFill class="main-div">
-    <mat-card fxFlex="25">
+  <mat-card fxFlex="25">
 
-        <mat-toolbar color="primary">Welcome to mySpendings</mat-toolbar>
+    <mat-toolbar color="primary">Welcome to mySpendings</mat-toolbar>
 
-        <form fxLayoutAlign="stretch" fxLayout="column" class="login-form" [formGroup]="formGroup" (ngSubmit)="loginProcess()">
-            <mat-form-field>
-                <mat-label>E-Mail</mat-label>
-                <input matInput type="email" placeholder="E-Mail" formControlName="email">
-            </mat-form-field>
+    <form fxLayoutAlign="stretch" fxLayout="column" class="login-form" [formGroup]="formGroup"
+      (ngSubmit)="loginProcess()">
+      <mat-form-field>
+        <mat-label>E-Mail</mat-label>
+        <input matInput type="email" placeholder="E-Mail" formControlName="email">
+      </mat-form-field>
 
-            <mat-form-field>
-                <mat-label>Password</mat-label>
-                <input matInput type="password" placeholder="Password" formControlName="password">
-            </mat-form-field>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput type="password" placeholder="Password" formControlName="password">
+      </mat-form-field>
 
-            <button mat-raised-button color="primary" type="submit" >Log in</button><!--now allways links to saldo-->
-            <button mat-raised-button color="primary" href="" routerLink="/register">Sign in</button>
-        </form>
-          
-    </mat-card>
+      <button mat-raised-button color="primary" type="submit">Log in</button>
+      <!--now allways links to saldo-->
+      <button mat-raised-button color="primary" href="" routerLink="/register">Sign in</button>
+    </form>
+
+  </mat-card>
 </div>
