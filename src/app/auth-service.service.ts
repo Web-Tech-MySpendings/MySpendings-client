@@ -7,7 +7,7 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
-import { Observable } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { API } from './../environments/environment';
 
@@ -30,12 +30,22 @@ export class AuthServiceService {
   }
 
   tokenRefresh(): Observable<any> {
-    return this.http.get(API.baseUrl + '/token', {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: this.cookieService.get('refreshToken'),
-      }),
-      observe: 'response',
-    });
+    return this.http
+      .get(API.baseUrl + '/token', {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          Authorization: this.cookieService.get('refreshToken'),
+        }),
+        observe: 'response',
+      })
+      .pipe(
+        map((result) => {
+          if (result.status === 200) {
+            this.cookieService.set('token', result.body['token']);
+            this.cookieService.set('refreshToken', result.body['refreshToken']);
+          }
+          return result;
+        })
+      );
   }
 }
