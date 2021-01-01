@@ -41,8 +41,6 @@ logout() {
 private loadTable() {
 
   this.resourceService.getAllSpendings().subscribe(result => {
-
-    console.log(result);
     let data: any = result.body;
 
     for (let i = 0; i < data.length; i++) {
