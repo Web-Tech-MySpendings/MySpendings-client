@@ -162,7 +162,6 @@ export class ViewComponent implements OnInit {
   }
 
   private createTable(result) {
-    console.log(result);
     let data: any = result.body;
     this.total = 0;
     this.elements=[];

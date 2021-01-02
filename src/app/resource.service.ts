@@ -24,15 +24,7 @@ export class ResourceService {
 
   getFilteredSpendings(filterParams: Object): Observable<any>{
 
-    //get methode kann nur daten im header übergeben (oder direkt in URL)
-    //bei get gibt es keinen body 
-    //http.get(url + '/?criteria='+ encodeURIComponent( JSON.stringify(criteria)));
-
-    console.log(encodeURIComponent(JSON.stringify(filterParams)));
-
-    return this.http.get(API.baseUrl + '/filter/?filterParams='+ encodeURIComponent(JSON.stringify(filterParams))
-    
-    , { observe: 'response' });
+    return this.http.get(API.baseUrl + '/filter/?filterParams='+ encodeURIComponent(JSON.stringify(filterParams)), { observe: 'response' });
       
   }
 
