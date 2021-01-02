@@ -22,14 +22,18 @@ export class ResourceService {
 
   }
 
-  getFilteredSpendings(body: Object): Observable<any>{
+  getFilteredSpendings(filterParams: Object): Observable<any>{
 
-    //Zusammen mit fabian fertig stellen 
-      //Wie soll body genau ausschauen? 
-      //Wie wurde das mit refresh-token gefixed? 
+    //get methode kann nur daten im header übergeben (oder direkt in URL)
+    //bei get gibt es keinen body 
+    //http.get(url + '/?criteria='+ encodeURIComponent( JSON.stringify(criteria)));
+
+    console.log(encodeURIComponent(JSON.stringify(filterParams)));
+
+    return this.http.get(API.baseUrl + '/filter/?filterParams='+ encodeURIComponent(JSON.stringify(filterParams))
+    
+    , { observe: 'response' });
       
-      //REST Convention:  put für Update/Replace
-    return null; 
   }
 
 

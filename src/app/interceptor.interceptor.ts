@@ -22,7 +22,7 @@ import { API } from './../environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import { Injectable } from '@angular/core';
 import { AuthServiceService } from './auth-service.service';
-import jwt_decode from 'jwt-decode';
+
 
 @Injectable()
 export class Interceptor implements HttpInterceptor {

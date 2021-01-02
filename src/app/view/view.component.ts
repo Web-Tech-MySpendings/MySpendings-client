@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { formatDate } from '@angular/common';
+
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { ResourceService } from '../resource.service';
@@ -43,18 +45,21 @@ export class ViewComponent implements OnInit {
   }
 
   //Variables for filter request:
-  startDate: Date;
-  endDate: Date;
+  startDate: string="1900-01-01";
+  endDate: string="2100-01-01";
   minValue: number = 100;
   maxValue: number = 400;
 
-  filterCategory: boolean[] = [true, true, true, true, true, true];
+  filterCategory: String[] = ['general', 'food', 'mobility', 'education', 'travel', 'entertainment'];
+  activeFilterCategory: boolean [] = [true, true, true, true, true, true];
 
   activeFilter: String = 'month';
   changeFilter(value) {
     if (value === 'filter') {
+
       this.showDetail = !this.showDetail;
     } else {
+
       this.showDetail = false;
     }
 
@@ -65,13 +70,16 @@ export class ViewComponent implements OnInit {
     }
   }
 
-  //out of unknown reasons it is not possible to rename this function
-  //this addEvent function is executed when the dateInput changes
-  addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
+  
+  
+  changeDate(type: string, event: MatDatepickerInputEvent<Date>) {
+    const format = 'yyyy-MM-dd';
+    const locale = 'en-US';
+
     if (type === 'start') {
-      this.startDate = event.value;
+      this.startDate = formatDate(event.value, format, locale);
     } else if (type === 'end') {
-      this.endDate = event.value;
+      this.endDate = formatDate(event.value, format, locale);
 
       if (this.startDate !== null && this.endDate !== null) {
         this.updateTable('filter');
@@ -97,8 +105,17 @@ export class ViewComponent implements OnInit {
     },
   };
 
-  SetCategory(btn_ID) {
-    this.filterCategory[btn_ID] = !this.filterCategory[btn_ID];
+  SetCategory(category: string, i: number) {
+    this.activeFilterCategory[i]=!this.activeFilterCategory[i];
+    let index=this.filterCategory.indexOf(category);
+
+    if(index>=0){//-1 if it does not exist
+      this.filterCategory=this.filterCategory.filter((cat)=>{return cat!==category});
+    }
+    else{
+      this.filterCategory.push(category);
+    }
+
     this.updateTable('filter');
   }
 
@@ -113,15 +130,17 @@ export class ViewComponent implements OnInit {
         break;
 
       case 'filter':
-        let httpBoddy = new Object({
-          startDate: this.startDate, //TODO: correct format!
+        let filterParams = 
+          {startDate: this.startDate,
           endDate: this.endDate,
-          minVale: this.minValue,
-          macValue: this.maxValue,
-          categories: this.filterCategory,
-        });
+          minValue: this.minValue,
+          maxValue: this.maxValue,
+          categories: this.filterCategory}
+        
+        
 
-        console.log(httpBoddy);
+        this.loadFiltered(filterParams);
+        console.log(filterParams);
 
         break;
 
@@ -136,10 +155,8 @@ export class ViewComponent implements OnInit {
     });
   }
 
-  private loadFiltered(body: Object) {
-    this.resourceService.getAllSpendings().subscribe((result) => {
-      //TODO: complete getFilteredSpendings
-      //this.resourceService.getFilteredSpendings(body).subscribe(result =>{
+  private loadFiltered(filterParams: Object) {
+    this.resourceService.getFilteredSpendings(filterParams).subscribe(result =>{
       this.createTable(result);
     });
   }
@@ -148,6 +165,7 @@ export class ViewComponent implements OnInit {
     console.log(result);
     let data: any = result.body;
     this.total = 0;
+    this.elements=[];
     for (let i = 0; i < data.length; i++) {
       this.total += data[i].value;
       this.elements.push({
