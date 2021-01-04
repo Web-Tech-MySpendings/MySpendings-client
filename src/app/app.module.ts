@@ -32,6 +32,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { CookieService } from 'ngx-cookie-service';
 import { ViewComponent } from './view/view.component';
 import { Interceptor } from './interceptor.interceptor';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { Interceptor } from './interceptor.interceptor';
     RegisterComponent,
     AddSpendingComponent,
     ViewComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

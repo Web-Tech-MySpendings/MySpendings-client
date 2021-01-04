@@ -17,20 +17,29 @@ export class ResourceService {
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 
   getAllSpendings(): Observable<any> {
-    
     return this.http.get(API.baseUrl + '/spendings', { observe: 'response' });
-
   }
 
-  getFilteredSpendings(body: Object): Observable<any>{
-
-    //Zusammen mit fabian fertig stellen 
-      //Wie soll body genau ausschauen? 
-      //Wie wurde das mit refresh-token gefixed? 
-      
-      //REST Convention:  put für Update/Replace
-    return null; 
+  getFilteredSpendings(filterParams: Object): Observable<any> {
+    return this.http.get(
+      API.baseUrl +
+        '/filter/?filterParams=' +
+        encodeURIComponent(JSON.stringify(filterParams)),
+      { observe: 'response' }
+    );
   }
 
+  getUserData(): Observable<any> {
+    return this.http.get(API.baseUrl + '/user', { observe: 'response' });
+  }
 
+  updateUser(data: Object): Observable<any> {
+    return this.http.patch(API.baseUrl + '/user', data, {
+      observe: 'response',
+    });
+  }
+
+  changePw(data: Object): Observable<any> {
+    return this.http.patch(API.baseUrl + '/pw', data, { observe: 'response' });
+  }
 }

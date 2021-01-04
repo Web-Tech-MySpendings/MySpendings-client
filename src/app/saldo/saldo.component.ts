@@ -2,43 +2,34 @@ import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { ResourceService } from '../resource.service';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-saldo',
   templateUrl: './saldo.component.html',
-  styleUrls: ['./saldo.component.css']
+  styleUrls: ['./saldo.component.css'],
 })
 export class SaldoComponent implements OnInit {
-
   matMenu: MatMenuModule;
 
-  constructor(
-    private router: Router,
-    private cookieService: CookieService
-  ) {}
+  constructor(private router: Router, private cookieService: CookieService) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   logout() {
-  console.log("logout")
-  this.cookieService.delete('token');
-  this.cookieService.delete('refreshToken');
-  this.router.navigate(['login']);
-}
-
-  charts(){
-
+    console.log('logout');
+    this.cookieService.delete('token');
+    this.cookieService.delete('refreshToken');
+    this.router.navigate(['login']);
   }
 
-  profile(){
+  charts() {}
 
+  profile() {
+    this.router.navigate(['profile']);
   }
 
-  home(){
-    
+  home() {
+    this.router.navigate(['view']);
   }
-
-  
 }
