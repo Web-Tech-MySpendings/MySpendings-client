@@ -22,14 +22,15 @@ import { API } from './../environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import { Injectable } from '@angular/core';
 import { AuthServiceService } from './auth-service.service';
-
+import { AlertService } from './alert.service';
 
 @Injectable()
 export class Interceptor implements HttpInterceptor {
   constructor(
     private http: HttpClient,
     private cookieService: CookieService,
-    private authService: AuthServiceService
+    private authService: AuthServiceService,
+    private alertService: AlertService
   ) {}
 
   refreshingAccessToken: boolean;
@@ -51,6 +52,8 @@ export class Interceptor implements HttpInterceptor {
                 return next.handle(this.setHeader(req));
               })
             );
+          } else {
+            this.alertService.errorNotification('Error occured');
           }
           return throwError(error);
         })

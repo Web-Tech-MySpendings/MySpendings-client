@@ -1,0 +1,39 @@
+<app-saldo></app-saldo>
+<div class="body">
+  <mat-card class="setting">Profile settings</mat-card>
+
+  <form class="table" [formGroup]="formGroup">
+    <mat-form-field>
+        <button
+          mat-raised-button
+          color="primary"
+          id="btn_update"
+          (click)="updateName()"
+        >
+          update name
+        </button>
+      <mat-label>User Name</mat-label>
+      <input matInput value="{{ userData.name }}" formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <button
+        mat-raised-button
+        color="primary"
+        id="btn_update"
+        (click)="updateEmail()"
+      >
+        update email
+      </button>
+      <input matInput value="{{ userData.email }}" formControlName="email" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput value="" type="password" formControlName="oldPassword" />
+
+      <!-- <button>Change Password</button> -->
+    </mat-form-field>
+  </form>
+</div>
