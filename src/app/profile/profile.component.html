@@ -1,39 +1,69 @@
 <app-saldo></app-saldo>
 <div class="body">
-  <mat-card class="setting">Profile settings</mat-card>
+    <mat-card class="setting">Profile settings</mat-card>
 
-  <form class="table" [formGroup]="formGroup">
-    <mat-form-field>
-        <button
-          mat-raised-button
-          color="primary"
-          id="btn_update"
-          (click)="updateName()"
-        >
-          update name
-        </button>
-      <mat-label>User Name</mat-label>
-      <input matInput value="{{ userData.name }}" formControlName="name" />
-    </mat-form-field>
+    <form class="table" [formGroup]="formGroup" *ngIf="!pwShow">
+        <mat-form-field>
+            <button mat-raised-button color="primary" id="btn_update" (click)="updateName()">
+                update name
+            </button>
+            <mat-label>User Name</mat-label>
+            <input matInput value="{{ userData.name }}" formControlName="name" />
+        </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Email</mat-label>
-      <button
-        mat-raised-button
-        color="primary"
-        id="btn_update"
-        (click)="updateEmail()"
-      >
-        update email
-      </button>
-      <input matInput value="{{ userData.email }}" formControlName="email" />
-    </mat-form-field>
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <button mat-raised-button color="primary" id="btn_update" (click)="updateEmail()">
+                update email
+            </button>
+            <input matInput value="{{ userData.email }}" formControlName="email" />
+        </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Password</mat-label>
-      <input matInput value="" type="password" formControlName="oldPassword" />
+        <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input matInput value="" formControlName="oldPassword" [type]="hidePW ? 'password' : 'text'" />
+            <button mat-icon-button matSuffix (click)="hidePW = !hidePW" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hidePW">
+                <mat-icon>{{hidePW ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+    </form>
 
-      <!-- <button>Change Password</button> -->
-    </mat-form-field>
-  </form>
+    <br>
+    <button mat-fab color="primary" (click)="pwShow = !pwShow" id="btn_pw">
+        <p *ngIf="!pwShow">change pw</p>
+        <p *ngIf="pwShow">cancel</p>
+    </button>
+
+    <form class="table" [formGroup]="formPW" *ngIf="pwShow" (ngSubmit)="changePW()">
+        <mat-form-field>
+            <mat-label>current Password</mat-label>
+            <input matInput formControlName="oldPassword" [type]="hideOld ? 'password' : 'text'" aria-selected="true" />
+            <button mat-icon-button matSuffix (click)="hideOld = !hideOld" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hideOld">
+                <mat-icon>{{hideOld ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>new Password</mat-label>
+            <input matInput formControlName="password" [type]="hideNew ? 'password' : 'text'" />
+            <button mat-icon-button matSuffix (click)="hideNew = !hideNew" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hideNew">
+                <mat-icon>{{hideNew ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>repeat new Password</mat-label>
+            <input matInput formControlName="checkPw" [type]="hideCheck ? 'password' : 'text'" />
+            <button mat-icon-button matSuffix (click)="hideCheck = !hideCheck">
+                <mat-icon>{{hideCheck ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+        <br>
+        <button type="submit" mat-raised-button color="primary">Update password</button>
+    </form>
+
+
 </div>

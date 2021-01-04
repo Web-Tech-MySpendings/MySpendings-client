@@ -36,6 +36,10 @@ export class ResourceService {
   updateUser(data: Object): Observable<any> {
     return this.http.patch(API.baseUrl + '/user', data, {
       observe: 'response',
-    }); 
+    });
+  }
+
+  changePw(data: Object): Observable<any> {
+    return this.http.patch(API.baseUrl + '/pw', data, { observe: 'response' });
   }
 }

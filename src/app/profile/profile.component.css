@@ -3,13 +3,17 @@
   margin-right: auto;
   max-width: 1000px;
 }
-button{
-    float: right;
-    display: inline;
+button {
+  float: right;
+  display: inline;
 }
 
 mat-card {
   margin: 2px;
+}
+
+mat-label {
+  font-size: large;
 }
 
 mat-form-field {
@@ -28,4 +32,8 @@ mat-form-field {
 
 .update {
   text-align: center;
+}
+
+#btn_pw {
+  width: 10%;
 }

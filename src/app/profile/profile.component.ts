@@ -14,6 +14,12 @@ export class ProfileComponent implements OnInit {
     private alertService: AlertService
   ) {}
   formGroup: FormGroup;
+  formPW: FormGroup;
+  pwShow: boolean = false;
+  hidePW: boolean = true;
+  hideOld: boolean = true;
+  hideNew: boolean = true;
+  hideCheck: boolean = true;
 
   ngOnInit(): void {
     this.loadUserData();
@@ -21,6 +27,11 @@ export class ProfileComponent implements OnInit {
       name: new FormControl(''),
       email: new FormControl(''),
       oldPassword: new FormControl('', [Validators.required]), // has to be called oldPassword for server api
+    });
+    this.formPW = new FormGroup({
+      oldPassword: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
+      checkPw: new FormControl('', [Validators.required]),
     });
   }
 
@@ -68,6 +79,22 @@ export class ProfileComponent implements OnInit {
         (error) => {
           console.log(error);
         };
+    }
+  }
+
+  changePW() {
+    if (this.formPW.value.password === this.formPW.value.checkPw) {
+      if (this.formPW.valid) {
+        const data = {
+          oldPassword: this.formPW.value.oldPassword,
+          password: this.formPW.value.password,
+        };
+        this.resourceService.changePw(data).subscribe(() => {
+          this.alertService.successNotification('Updated password');
+        });
+      }
+    } else {
+      this.alertService.errorNotification('repeat the correct password');
     }
   }
 }
