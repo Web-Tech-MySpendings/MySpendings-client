@@ -12,10 +12,28 @@ export class AlertService {
   }
 
   successNotification(msg: string) {
+    Swal.fire({
+      icon: 'success',
+      title: msg,
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  }
+
+  successAlert(msg: string) {
     Swal.fire('', msg, 'success');
   }
 
   errorNotification(msg: string) {
+    Swal.fire({
+      icon: 'error',
+      title: msg,
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  }
+
+  errorAlert(msg: string) {
     Swal.fire('', msg, 'error');
   }
 

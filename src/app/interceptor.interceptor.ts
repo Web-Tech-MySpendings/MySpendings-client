@@ -53,7 +53,7 @@ export class Interceptor implements HttpInterceptor {
               })
             );
           } else {
-            this.alertService.errorNotification('Error occured');
+            this.alertService.errorAlert('Error occured');
           }
           return throwError(error);
         })
