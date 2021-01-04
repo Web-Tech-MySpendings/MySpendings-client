@@ -19,7 +19,7 @@ export class AlertService {
     Swal.fire('', msg, 'error');
   }
 
-  alertConfirmation(txt: string) {
+  alertConfirmation(txt: string, success: Function, dismiss: Function) {
     Swal.fire({
       title: 'Are you sure?',
       text: txt,
@@ -30,8 +30,10 @@ export class AlertService {
     }).then((result) => {
       if (result.value) {
         Swal.fire('Success', '', 'success');
+        success();
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire('Cancelled', '', 'error');
+        dismiss();
       }
     });
   }
