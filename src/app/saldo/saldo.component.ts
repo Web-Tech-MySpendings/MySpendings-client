@@ -23,7 +23,9 @@ export class SaldoComponent implements OnInit {
     this.router.navigate(['login']);
   }
 
-  charts() {}
+  charts() {
+    this.router.navigate(['chart']);
+  }
 
   profile() {
     this.router.navigate(['profile']);

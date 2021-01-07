@@ -29,6 +29,15 @@ export class ResourceService {
     );
   }
 
+  getSpendingsForMonth(filterParams: Object): Observable<any> {
+    return this.http.get(
+      API.baseUrl +
+        '/filter/date/?filterParams=' +
+        encodeURIComponent(JSON.stringify(filterParams)),
+      { observe: 'response' }
+    );
+  }
+
   getUserData(): Observable<any> {
     return this.http.get(API.baseUrl + '/user', { observe: 'response' });
   }
