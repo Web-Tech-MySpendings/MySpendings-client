@@ -17,7 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuItem, MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { Ng5SliderModule } from 'ng5-slider';
 
@@ -33,6 +33,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { ViewComponent } from './view/view.component';
 import { Interceptor } from './interceptor.interceptor';
 import { ProfileComponent } from './profile/profile.component';
+import { ChartComponent } from './chart/chart.component';
+
 
 @NgModule({
   declarations: [
@@ -43,6 +45,7 @@ import { ProfileComponent } from './profile/profile.component';
     AddSpendingComponent,
     ViewComponent,
     ProfileComponent,
+    ChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,14 +61,12 @@ import { ProfileComponent } from './profile/profile.component';
     ReactiveFormsModule,
     MatButtonModule,
     MatButtonToggleModule,
-
     MatMenuModule,
     MatButtonToggleModule,
     MatIconModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    Ng5SliderModule 
-
+    Ng5SliderModule,
   ],
   providers: [
     CurrencyPipe,

@@ -6,6 +6,7 @@ import { SaldoComponent } from './saldo/saldo.component';
 import { AddSpendingComponent } from './add-spending/add-spending.component';
 import { ViewComponent } from './view/view.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ChartComponent } from './chart/chart.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'view', component: ViewComponent },
   { path: 'add', component: AddSpendingComponent }, //just for test purpose
-  { path: 'profile', component: ProfileComponent }, 
+  { path: 'profile', component: ProfileComponent },
+  { path: 'chart', component: ChartComponent },
 ];
 
 @NgModule({
