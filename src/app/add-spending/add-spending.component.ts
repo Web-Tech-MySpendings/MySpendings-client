@@ -25,4 +25,8 @@ export class AddSpendingComponent implements OnInit {
     element.target.value = this.formattedAmount;
 }
 
+  sendAdd(){
+    console.log("ADD SPENDING (SEND TO SERVER!")
+  }
+
 }
