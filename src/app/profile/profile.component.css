@@ -1,0 +1,40 @@
+.body {
+  margin-left: 15%;
+  margin-right: 15%;
+  max-width: auto;
+  align-content: center;
+}
+button {
+  float: right;
+  display: inline;
+}
+
+mat-card {
+  margin: 2px;
+}
+
+mat-label {
+  font-size: large;
+}
+
+mat-form-field {
+  padding-top: 1.5em;
+  width: 100%;
+  font-size: large;
+  margin: auto;
+  height: 10px;
+}
+
+.setting {
+  font-size: large;
+  text-align: center;
+  font-size: 3em;
+}
+
+.update {
+  text-align: center;
+}
+
+#btn_pw {
+  width: 10%;
+}

@@ -19,12 +19,11 @@ export class LoginComponent implements OnInit {
     private cookieService: CookieService
     ) 
     {   
-           
+          
     }
 
   ngOnInit(): void {
     this.initForm();
-    
   }
 
   //Body of http-request:

@@ -1,0 +1,25 @@
+mat-card {
+  margin: 2px;
+}
+
+.filter,
+.filter-detail {
+  text-align: center;
+}
+
+.filter-detail > * {
+  width: 100%;
+}
+
+.filter-btn {
+  width: 200%;
+  text-align: center;
+}
+
+#divChart {
+  display: block;
+  height: 80%;
+  width: 80%;
+  margin-right: 10%;
+  margin-left: 10%;
+}

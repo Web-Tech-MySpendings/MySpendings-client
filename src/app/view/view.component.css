@@ -18,9 +18,6 @@ mat-card{
     width: 100%;
 }
 
-mat-button-toggle-group{
-    width: 100%;
-}
 
 .filter-btn{ 
     width: 33%;
@@ -28,6 +25,9 @@ mat-button-toggle-group{
 }
 
 
+mat-button-toggle-group{
+    width: 100%;
+}
 
 
 body.modal-open {
