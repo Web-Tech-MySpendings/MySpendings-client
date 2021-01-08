@@ -29,6 +29,7 @@ export class ResourceService {
     );
   }
 
+  //filter params only start and end date 
   getSpendingsForMonth(filterParams: Object): Observable<any> {
     return this.http.get(
       API.baseUrl +

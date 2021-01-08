@@ -118,6 +118,7 @@ export class ViewComponent implements OnInit {
 
     this.updateTable('filter');
   }
+  
 
   updateTable(type) {
     switch (type) {

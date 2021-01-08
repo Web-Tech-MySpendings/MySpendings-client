@@ -1,33 +1,37 @@
 <app-saldo></app-saldo>
-<<<<<<< HEAD
 
 <div class="body">
   <mat-card >
     <mat-form-field class="addSpending">
       <mat-label>new Spending</mat-label>
-      <input matInput (blur)="transformAmount($event)" [(ngModel)]="formattedAmount" placeholder="0.00" type="text"
+      €<input digitOnly matInput (blur)="transformAmount($event)" [(ngModel)]="formattedAmount" placeholder="0.00" type="number"
         value="0.00">
     </mat-form-field>
   
 
+
+
     <mat-form-field appearance="fill">
       <mat-label>Choose a date</mat-label>
-      <input matInput [matDatepicker]="picker">
+      <input matInput [matDatepicker]="picker" (dateInput)="setDate($event)">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
+
+
+
     <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-      <mat-button-toggle value="Genral">General</mat-button-toggle>
-      <mat-button-toggle value="Food">Food</mat-button-toggle>
-      <mat-button-toggle value="Mobility">Mobility</mat-button-toggle>
-      <mat-button-toggle value="Education">Education</mat-button-toggle>
-      <mat-button-toggle value="Travel">Travel</mat-button-toggle>
-      <mat-button-toggle value="Entertainment">Entertainment</mat-button-toggle>
+      <mat-button-toggle value="Genral" (change)="setCategory($event.value)">General</mat-button-toggle>
+      <mat-button-toggle value="Food" (change)="setCategory($event.value)">Food</mat-button-toggle>
+      <mat-button-toggle value="Mobility" (change)="setCategory($event.value)">Mobility</mat-button-toggle>
+      <mat-button-toggle value="Education" (change)="setCategory($event.value)">Education</mat-button-toggle>
+      <mat-button-toggle value="Travel" (change)="setCategory($event.value)">Travel</mat-button-toggle>
+      <mat-button-toggle value="Entertainment" (change)="setCategory($event.value)">Entertainment</mat-button-toggle>
     </mat-button-toggle-group>
 
     
-    <mat-form-field appearance="fill" class="comment">
+    <mat-form-field appearance="fill" class="comment" (ngSubmit)="sendAdd()">
       <mat-label>Comment</mat-label>
       <textarea matInput></textarea>
     </mat-form-field>
@@ -43,24 +47,4 @@
 
 
 </div>
-=======
-<mat-card class="addSpending">
-  <mat-form-field>
-    <mat-label>new Spending</mat-label>
-    <input matInput (blur)="transformAmount($event)" [(ngModel)]="formattedAmount" placeholder="0.00" type="text"
-      value="0.00">
-  </mat-form-field>
-</mat-card>
 
-
-<mat-card class="categories">
-  <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-    <mat-button-toggle value="Genral">General</mat-button-toggle>
-    <mat-button-toggle value="Food">Food</mat-button-toggle>
-    <mat-button-toggle value="Mobility">Mobility</mat-button-toggle>
-    <mat-button-toggle value="Education">Education</mat-button-toggle>
-    <mat-button-toggle value="Travel">Travel</mat-button-toggle>
-    <mat-button-toggle value="Entertainment">Entertainment</mat-button-toggle>
-  </mat-button-toggle-group>
-</mat-card>
->>>>>>> fa03c3bb51de87037db4a8625fdac9349d6b5b8b
