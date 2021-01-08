@@ -1,7 +1,10 @@
 import { Component, OnInit, ElementRef  } from '@angular/core';
 import { CommonModule, CurrencyPipe} from '@angular/common';
 import { formatDate } from '@angular/common';
-import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { AlertService } from '../alert.service';
+import { ResourceService } from '../resource.service';
+import {Router} from '@angular/router';
+
 
 
 @Component({
@@ -10,69 +13,49 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
   styleUrls: ['./add-spending.component.css']
 })
 export class AddSpendingComponent implements OnInit {
+  format = 'yyyy-MM-dd';
+  locale = 'en-US';
 
-  formattedAmount;
-  amount;
-
-  constructor(private currencyPipe : CurrencyPipe) {
+  constructor(
+    private currencyPipe : CurrencyPipe,
+    private alertService: AlertService,
+    private resourceService: ResourceService,
+    public router: Router,
+    ) {
   }
 
   value: number=0; 
-  date: string="";
-  category="test";
-  comment="test";
+  date: Date=new Date((new Date().getTime()));
+  type="";
+  comment="";
 
   ngOnInit(): void {
+    this.type ='general';
   }
-
-
-  transformAmount(event){
-    this.value=event.target.value;
-    //console.log("onchange ",this.value)
-    //this.formattedAmount = this.currencyPipe.transform(this.formattedAmount, '€');
-}
-
-  setDate(event: MatDatepickerInputEvent<Date>){
-    const format = 'yyyy-MM-dd';
-    const locale = 'en-US';
-    this.date = formatDate(event.value, format, locale);
-  }
-
-  setCategory(value){
-    this.category=value;
-  }
-
-  setComment(event){
-
-    console.log("Event: ",event)
-    console.log("setComment")
-    //this.comment=event; 
-  }
-
-
 
 
   sendAdd(){
-
-    console.log(document.getElementById("commentID"))
-    //this.comment=document.getElementById("commentID").textContent;
-    console.log("Comment: ")
-
     console.log("ADD SPENDING (SEND TO SERVER!)")
 
-    console.log("Value: "+this.value);
-    console.log("Date: "+this.date);
-    console.log("Category: "+this.category);
-    console.log("comment: "+this.comment);
-    /*
-          value 
-          category
-          categories: this.filterCategory
-    */
+    if(this.value===0){
+      this.alertService.errorNotification('Spending can not be null');
+    }
+    else{
+      let spending = 
+      {
+      value: this.value,
+      date: formatDate(this.date, this.format, this.locale),
+      type: this.type,
+      comment: this.comment}
 
+    
+      this.resourceService.insertSpending(spending).subscribe(() =>{
+        this.alertService.successNotification("new spending added");
+      }) 
 
-
-
+      this.router.navigate(['view']);
+    }
+  
   }
 
 }

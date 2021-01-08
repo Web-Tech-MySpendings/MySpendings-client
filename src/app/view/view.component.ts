@@ -14,13 +14,17 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 })
 export class ViewComponent implements OnInit {
   //for Table
+  type: string="all"
   elements: any = [];
   headElements = ['Value', 'Date', 'Category', 'Comment'];
 
   //total value
   total: number = 0;
-
   showDetail: boolean = false;
+
+  //for date formater 
+  format = 'yyyy-MM-dd';
+  locale = 'en-US';
 
   constructor(
     private cookieService: CookieService,
@@ -30,6 +34,7 @@ export class ViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadAll();
+
   }
 
   addSpending() {
@@ -65,7 +70,8 @@ export class ViewComponent implements OnInit {
 
     //To not send same request again
     if (value !== this.activeFilter) {
-      this.updateTable(value);
+      this.type=value;
+      this.updateTable();
       this.activeFilter = value;
     }
   }
@@ -73,16 +79,15 @@ export class ViewComponent implements OnInit {
   
   
   changeDate(type: string, event: MatDatepickerInputEvent<Date>) {
-    const format = 'yyyy-MM-dd';
-    const locale = 'en-US';
 
     if (type === 'start') {
-      this.startDate = formatDate(event.value, format, locale);
+      this.startDate = formatDate(event.value, this.format, this.locale);
     } else if (type === 'end') {
-      this.endDate = formatDate(event.value, format, locale);
+      this.endDate = formatDate(event.value, this.format, this.locale);
 
       if (this.startDate !== null && this.endDate !== null) {
-        this.updateTable('filter');
+        this.type='filter';
+        this.updateTable();
       }
     }
   }
@@ -91,7 +96,7 @@ export class ViewComponent implements OnInit {
 
   options: Options = {
     floor: 0,
-    ceil: 500, //TODO: get max value
+    ceil: 0, //TODO: get max value
     translate: (value: number, label: LabelType): string => {
       switch (label) {
         case LabelType.Low:
@@ -116,18 +121,34 @@ export class ViewComponent implements OnInit {
       this.filterCategory.push(category);
     }
 
-    this.updateTable('filter');
+    this.type='filter'
+    this.updateTable();
   }
   
 
-  updateTable(type) {
-    switch (type) {
+  updateTable() {
+    
+    switch (this.type) {
       case 'all':
         this.loadAll();
         break;
 
       case 'month':
         console.log('Send request for current month here');
+
+        var date = new Date(), y = date.getFullYear(), m = date.getMonth();
+        var firstDay = new Date(y, m, 1);   
+        var lastDay = new Date(y, m + 1, 0);
+
+        let monthParams =  {
+          startDate: formatDate(firstDay, this.format, this.locale),
+          endDate: formatDate(lastDay, this.format, this.locale),
+          minValue: 0,
+          maxValue: this.options.ceil, //this is the highest possible value 
+          categories: ['general', 'food', 'mobility', 'education', 'travel', 'entertainment']
+        }
+
+        this.loadFiltered(monthParams);
         break;
 
       case 'filter':
@@ -164,11 +185,19 @@ export class ViewComponent implements OnInit {
 
   private createTable(result) {
     let data: any = result.body;
+
+
     this.total = 0;
     this.elements=[];
     for (let i = 0; i < data.length; i++) {
       this.total += data[i].value;
+
+      if(data[i].value>this.options.ceil){
+        this.options.ceil=data[i].value;
+      }
+
       this.elements.push({
+        sid: data[i].sid,
         value: data[i].value,
         spending: data[i].sid,
         date: data[i].date.substring(0, 10),
@@ -176,5 +205,13 @@ export class ViewComponent implements OnInit {
         comment: data[i].comment,
       });
     }
+  }
+
+  openDetailView(sid){
+    console.log("DETAIL VIEW!!! sid="+sid)
+
+
+
+    
   }
 }
