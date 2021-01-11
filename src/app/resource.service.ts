@@ -60,7 +60,11 @@ export class ResourceService {
   }
 
   updateSpending(data: Object): Observable<any> {
-    return this.http.patch(API.baseUrl + '/update', data, {observe: 'response'})
+    return this.http.patch(API.baseUrl + '/update', data, {observe: 'response'});
+  }
+
+  deleteSpending(sid: number): Observable<any> {
+    return this.http.delete(API.baseUrl + '/alter/'+sid, {observe: 'response'});
   }
 
 }

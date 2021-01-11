@@ -58,7 +58,7 @@ export class ChartComponent implements OnInit {
     this.myChart = new Chart('chart', {
       options: this.options,
     });
-    // this.reportChart('all');
+    this.reportChart('all');
   }
 
   reportChart(type: string) {
@@ -94,7 +94,9 @@ export class ChartComponent implements OnInit {
         this.resourceService
           .getSpendingsForMonth(filterParams)
           .subscribe((result) => {
+            
             const data = result.body;
+            console.log(data);
             this.createDailyChart(data);
           });
         break;
@@ -155,7 +157,7 @@ export class ChartComponent implements OnInit {
       spending.push(0);
     }
     for (let i = 0; i < data.length; i++) {
-      spending[labels.indexOf(parseInt(data[i].date.substring(8, 10)))] =
+      spending[labels.indexOf(parseInt(data[i].date.substring(8, 10)))] +=
         parseFloat(data[i].value);
     }
     this.myChart.destroy();

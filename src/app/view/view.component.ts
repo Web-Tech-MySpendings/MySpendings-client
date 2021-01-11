@@ -17,7 +17,10 @@ import { DetailComponent } from '../detail/detail.component';
 export class ViewComponent implements OnInit {
   //for Table
   type: string = 'all';
-  elements: any = [];
+  elementsAll: any = [];
+  elementsMonth: any = [];
+  elementsFilter: any = [];
+
   headElements = ['Value', 'Date', 'Category', 'Comment'];
 
   //total value
@@ -57,8 +60,8 @@ export class ViewComponent implements OnInit {
   //Variables for filter request:
   startDate: string = '1900-01-01';
   endDate: string = '2100-01-01';
-  minValue: number = 100;
-  maxValue: number = 400;
+  minValue: number = 0;
+  maxValue: number = 1000000;
 
   filterCategory: String[] = [
     'general',
@@ -203,15 +206,33 @@ export class ViewComponent implements OnInit {
     let data: any = result.body;
 
     this.total = 0;
-    this.elements = [];
+
+    switch(this.type){
+      case 'all': 
+        this.elementsAll = [];
+        this.pushElements(this.elementsAll,data);
+        break;
+      
+      case 'month': 
+        this.elementsMonth = [];
+        this.pushElements(this.elementsMonth,data);
+        break;
+      
+      case 'filter': 
+        this.elementsFilter = [];
+        this.pushElements(this.elementsFilter,data);
+        break; 
+    }
+  }
+
+  private pushElements(elements: any, data: any){
     for (let i = 0; i < data.length; i++) {
       this.total += parseFloat(data[i].value);
 
       if (parseFloat(data[i].value) > this.options.ceil) {
         this.options.ceil = parseFloat(data[i].value);
       }
-
-      this.elements.push({
+      elements.push({
         sid: data[i].sid,
         value: data[i].value,
         spending: data[i].sid,
@@ -232,6 +253,7 @@ export class ViewComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
 
       //TODO: Update Table !!
+      this.updateTable();
 
     });
 

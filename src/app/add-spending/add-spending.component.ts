@@ -45,7 +45,7 @@ export class AddSpendingComponent implements OnInit {
       {
       value: this.value,
       date: formatDate(this.date, this.format, this.locale),
-      type: this.type,
+      type: this.type.toLowerCase(),
       comment: this.comment}
 
     

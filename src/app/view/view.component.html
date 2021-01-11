@@ -53,7 +53,7 @@
 
   </mat-card>
 
-  <mat-card class="table">
+  <mat-card class="table" id="all" *ngIf="type=='all'">
     <table mat-table maxHeight="200" bordered="true">
       <thead>
         <tr>
@@ -62,12 +62,68 @@
       </thead>
       <tbody>
 
-            <tr *ngFor="let el of elements; let i = index" (click)="openDetailView(el.sid, el.value, el.date, el.type, el.comment)">
+            <tr *ngFor="let el of elementsAll; let i = index">
 
               <th scope="row">€ {{el.value}}</th>
               <td>{{el.date}}</td>
               <td>{{el.type}}</td>
               <td>{{el.comment}}</td>
+              <td>
+                <button mat-menu-item id="btn_update" (click)="openDetailView(el.sid, el.value, el.date, el.type, el.comment)">
+                <mat-icon>settings</mat-icon>
+              </button></td>
+
+        </tr>
+
+      </tbody>
+    </table>
+  </mat-card>
+
+  <mat-card class="table" id="month" *ngIf="type=='month'">
+    <table mat-table maxHeight="200" bordered="true">
+      <thead>
+        <tr>
+          <th *ngFor="let head of headElements; let i = index" scope="col">{{head}}</th>
+        </tr>
+      </thead>
+      <tbody>
+
+            <tr *ngFor="let el of elementsMonth; let i = index">
+
+              <th scope="row">€ {{el.value}}</th>
+              <td>{{el.date}}</td>
+              <td>{{el.type}}</td>
+              <td>{{el.comment}}</td>
+              <td>
+                <button mat-menu-item id="btn_update" (click)="openDetailView(el.sid, el.value, el.date, el.type, el.comment)">
+                <mat-icon>settings</mat-icon>
+              </button></td>
+
+        </tr>
+
+      </tbody>
+    </table>
+  </mat-card>
+
+  <mat-card class="table" id="filter" *ngIf="type=='filter'">
+    <table mat-table maxHeight="200" bordered="true">
+      <thead>
+        <tr>
+          <th *ngFor="let head of headElements; let i = index" scope="col">{{head}}</th>
+        </tr>
+      </thead>
+      <tbody>
+
+            <tr *ngFor="let el of elementsFilter; let i = index">
+
+              <th scope="row">€ {{el.value}}</th>
+              <td>{{el.date}}</td>
+              <td>{{el.type}}</td>
+              <td>{{el.comment}}</td>
+              <td>
+                <button mat-menu-item id="btn_update" (click)="openDetailView(el.sid, el.value, el.date, el.type, el.comment)">
+                <mat-icon>settings</mat-icon>
+              </button></td>
 
         </tr>
 

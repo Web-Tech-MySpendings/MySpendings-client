@@ -1,7 +1,7 @@
 <div class="body">
     <mat-card >
       <mat-form-field class="addSpending">
-        <mat-label>new Spending</mat-label>
+        <mat-label>Update Spending</mat-label>
         €<input digitOnly matInput [(ngModel)]="dialogData.value" placeholder="0.00" type="number"
           value="0.00">
       </mat-form-field>
@@ -32,14 +32,16 @@
   
     </mat-card>
     
+    
     <mat-card class="update">
       <button mat-fab color="primary" id="btn_update" (click)="updateData()" href="">
-        <mat-icon>update</mat-icon>
+        <mat-icon>cached</mat-icon>
       </button> 
       <button mat-fab color="primary" id="btn_delete" (click)="deleteSpending()">
         <mat-icon>delete</mat-icon>
       </button> 
     </mat-card>
+    
   
 
   
