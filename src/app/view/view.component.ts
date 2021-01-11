@@ -14,17 +14,19 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 })
 export class ViewComponent implements OnInit {
   //for Table
-  type: string="all"
+  type: string = 'all';
   elements: any = [];
   headElements = ['Value', 'Date', 'Category', 'Comment'];
 
   //total value
   total: number = 0;
   showDetail: boolean = false;
-
-  //for date formater 
+  
+  //for date formater
   format = 'yyyy-MM-dd';
   locale = 'en-US';
+
+  selectedValue: string;
 
   constructor(
     private cookieService: CookieService,
@@ -34,7 +36,7 @@ export class ViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadAll();
-
+    this.selectedValue = 'all';
   }
 
   addSpending() {
@@ -50,43 +52,44 @@ export class ViewComponent implements OnInit {
   }
 
   //Variables for filter request:
-  startDate: string="1900-01-01";
-  endDate: string="2100-01-01";
+  startDate: string = '1900-01-01';
+  endDate: string = '2100-01-01';
   minValue: number = 100;
   maxValue: number = 400;
 
-  filterCategory: String[] = ['general', 'food', 'mobility', 'education', 'travel', 'entertainment'];
-  activeFilterCategory: boolean [] = [true, true, true, true, true, true];
+  filterCategory: String[] = [
+    'general',
+    'food',
+    'mobility',
+    'education',
+    'travel',
+    'entertainment',
+  ];
+  activeFilterCategory: boolean[] = [true, true, true, true, true, true];
 
   activeFilter: String = 'month';
   changeFilter(value) {
     if (value === 'filter') {
-
       this.showDetail = !this.showDetail;
     } else {
-
       this.showDetail = false;
     }
 
     //To not send same request again
-    if (value !== this.activeFilter) {
-      this.type=value;
-      this.updateTable();
-      this.activeFilter = value;
-    }
+ 
+    this.type = value;
+    this.updateTable();
+    this.activeFilter = value;
   }
 
-  
-  
   changeDate(type: string, event: MatDatepickerInputEvent<Date>) {
-
     if (type === 'start') {
       this.startDate = formatDate(event.value, this.format, this.locale);
     } else if (type === 'end') {
       this.endDate = formatDate(event.value, this.format, this.locale);
 
       if (this.startDate !== null && this.endDate !== null) {
-        this.type='filter';
+        this.type = 'filter';
         this.updateTable();
       }
     }
@@ -111,23 +114,23 @@ export class ViewComponent implements OnInit {
   };
 
   SetCategory(category: string, i: number) {
-    this.activeFilterCategory[i]=!this.activeFilterCategory[i];
-    let index=this.filterCategory.indexOf(category);
+    this.activeFilterCategory[i] = !this.activeFilterCategory[i];
+    let index = this.filterCategory.indexOf(category);
 
-    if(index>=0){//-1 if it does not exist
-      this.filterCategory=this.filterCategory.filter((cat)=>{return cat!==category});
-    }
-    else{
+    if (index >= 0) {
+      //-1 if it does not exist
+      this.filterCategory = this.filterCategory.filter((cat) => {
+        return cat !== category;
+      });
+    } else {
       this.filterCategory.push(category);
     }
 
-    this.type='filter'
+    this.type = 'filter';
     this.updateTable();
   }
-  
 
   updateTable() {
-    
     switch (this.type) {
       case 'all':
         this.loadAll();
@@ -136,30 +139,38 @@ export class ViewComponent implements OnInit {
       case 'month':
         console.log('Send request for current month here');
 
-        var date = new Date(), y = date.getFullYear(), m = date.getMonth();
-        var firstDay = new Date(y, m, 1);   
+        var date = new Date(),
+          y = date.getFullYear(),
+          m = date.getMonth();
+        var firstDay = new Date(y, m, 1);
         var lastDay = new Date(y, m + 1, 0);
 
-        let monthParams =  {
+        let monthParams = {
           startDate: formatDate(firstDay, this.format, this.locale),
           endDate: formatDate(lastDay, this.format, this.locale),
           minValue: 0,
-          maxValue: this.options.ceil, //this is the highest possible value 
-          categories: ['general', 'food', 'mobility', 'education', 'travel', 'entertainment']
-        }
+          maxValue: this.options.ceil, //this is the highest possible value
+          categories: [
+            'general',
+            'food',
+            'mobility',
+            'education',
+            'travel',
+            'entertainment',
+          ],
+        };
 
         this.loadFiltered(monthParams);
         break;
 
       case 'filter':
-        let filterParams = 
-          {startDate: this.startDate,
+        let filterParams = {
+          startDate: this.startDate,
           endDate: this.endDate,
           minValue: this.minValue,
           maxValue: this.maxValue,
-          categories: this.filterCategory}
-        
-        
+          categories: this.filterCategory,
+        };
 
         this.loadFiltered(filterParams);
         console.log(filterParams);
@@ -178,22 +189,23 @@ export class ViewComponent implements OnInit {
   }
 
   private loadFiltered(filterParams: Object) {
-    this.resourceService.getFilteredSpendings(filterParams).subscribe(result =>{
-      this.createTable(result);
-    });
+    this.resourceService
+      .getFilteredSpendings(filterParams)
+      .subscribe((result) => {
+        this.createTable(result);
+      });
   }
 
   private createTable(result) {
     let data: any = result.body;
 
-
     this.total = 0;
-    this.elements=[];
+    this.elements = [];
     for (let i = 0; i < data.length; i++) {
       this.total += parseFloat(data[i].value);
 
-      if(parseFloat(data[i].value)>this.options.ceil){
-        this.options.ceil=parseFloat(data[i].value);
+      if (parseFloat(data[i].value) > this.options.ceil) {
+        this.options.ceil = parseFloat(data[i].value);
       }
 
       this.elements.push({
@@ -207,11 +219,7 @@ export class ViewComponent implements OnInit {
     }
   }
 
-  openDetailView(sid){
-    console.log("DETAIL VIEW!!! sid="+sid)
-
-
-
-    
+  openDetailView(sid) {
+    console.log('DETAIL VIEW!!! sid=' + sid);
   }
 }

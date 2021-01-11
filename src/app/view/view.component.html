@@ -3,10 +3,13 @@
 <div class="body" (mouseup)="updateTable()">
 
   <mat-card class="filter">
-    <mat-button-toggle-group name="filter" aria-label="Filter">
-      <mat-button-toggle class="filter-btn" value="all"   (change)="changeFilter($event.value)">All</mat-button-toggle>
-      <mat-button-toggle class="filter-btn" value="month" (change)="changeFilter($event.value)">Month</mat-button-toggle>
-      <mat-button-toggle class="filter-btn" value="filter"(change)="changeFilter($event.value)">Filter</mat-button-toggle>
+    <mat-button-toggle-group name="filter" aria-label="Filter" [value]="selectedValue">
+      <mat-button-toggle class="filter-btn" value="all" (change)="changeFilter($event.value)">All
+      </mat-button-toggle>
+      <mat-button-toggle class="filter-btn" value="month" (change)="changeFilter($event.value)">Month
+      </mat-button-toggle>
+      <mat-button-toggle class="filter-btn" value="filter" (change)="changeFilter($event.value)">Filter
+      </mat-button-toggle>
     </mat-button-toggle-group>
   </mat-card>
 
@@ -16,7 +19,7 @@
       <mat-label>Enter a date range</mat-label>
       <mat-date-range-input [rangePicker]="picker">
         <input matStartDate placeholder="Start date" (dateInput)="changeDate('start', $event)">
-        <input matEndDate placeholder="End date"     (dateInput)="changeDate('end', $event)">
+        <input matEndDate placeholder="End date" (dateInput)="changeDate('end', $event)">
       </mat-date-range-input>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-date-range-picker #picker></mat-date-range-picker>
@@ -27,14 +30,20 @@
     <div>
       <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"></ng5-slider>
     </div>
-      
+
     <div class="filterCategory">
-      <button mat-raised-button color="primary" id="0" class="filterCategory" (click)="SetCategory('general', 0)" [ngClass]="{'selected' : !activeFilterCategory[0]}">General</button>
-      <button mat-raised-button color="primary" id="1" class="filterCategory" (click)="SetCategory('food', 1)" [ngClass]="{'selected' : !activeFilterCategory[1]}">Food</button>
-      <button mat-raised-button color="primary" id="2" class="filterCategory" (click)="SetCategory('mobility', 2)" [ngClass]="{'selected' : !activeFilterCategory[2]}">Mobility</button>
-      <button mat-raised-button color="primary" id="3" class="filterCategory" (click)="SetCategory('education', 3)" [ngClass]="{'selected' : !activeFilterCategory[3]}">Education</button>
-      <button mat-raised-button color="primary" id="4" class="filterCategory" (click)="SetCategory('travel', 4)" [ngClass]="{'selected' : !activeFilterCategory[4]}">Travel</button>
-      <button mat-raised-button color="primary" id="5" class="filterCategory" (click)="SetCategory('entertainment', 5)" [ngClass]="{'selected' : !activeFilterCategory[5]}">Entertainment</button>
+      <button mat-raised-button color="primary" id="0" class="filterCategory" (click)="SetCategory('general', 0)"
+        [ngClass]="{'selected' : !activeFilterCategory[0]}">General</button>
+      <button mat-raised-button color="primary" id="1" class="filterCategory" (click)="SetCategory('food', 1)"
+        [ngClass]="{'selected' : !activeFilterCategory[1]}">Food</button>
+      <button mat-raised-button color="primary" id="2" class="filterCategory" (click)="SetCategory('mobility', 2)"
+        [ngClass]="{'selected' : !activeFilterCategory[2]}">Mobility</button>
+      <button mat-raised-button color="primary" id="3" class="filterCategory" (click)="SetCategory('education', 3)"
+        [ngClass]="{'selected' : !activeFilterCategory[3]}">Education</button>
+      <button mat-raised-button color="primary" id="4" class="filterCategory" (click)="SetCategory('travel', 4)"
+        [ngClass]="{'selected' : !activeFilterCategory[4]}">Travel</button>
+      <button mat-raised-button color="primary" id="5" class="filterCategory" (click)="SetCategory('entertainment', 5)"
+        [ngClass]="{'selected' : !activeFilterCategory[5]}">Entertainment</button>
     </div>
 
   </mat-card>
@@ -43,34 +52,33 @@
     € {{total}}
 
   </mat-card>
-    
+
   <mat-card class="table">
-      <table mat-table maxHeight="200" bordered="true">
-          <thead>
-            <tr>
-              <th *ngFor="let head of headElements; let i = index" scope="col">{{head}}</th>
-            </tr>
-          </thead>
-          <tbody>
+    <table mat-table maxHeight="200" bordered="true">
+      <thead>
+        <tr>
+          <th *ngFor="let head of headElements; let i = index" scope="col">{{head}}</th>
+        </tr>
+      </thead>
+      <tbody>
 
-            <tr *ngFor="let el of elements; let i = index" (click)="openDetailView(el.sid)">
+        <tr *ngFor="let el of elements; let i = index" (click)="openDetailView(el.sid)">
 
-              <th scope="row">€ {{el.value}}</th>
-              <td>{{el.date}}</td>
-              <td>{{el.category}}</td>
-              <td>{{el.comment}}</td>
+          <th scope="row">€ {{el.value}}</th>
+          <td>{{el.date}}</td>
+          <td>{{el.category}}</td>
+          <td>{{el.comment}}</td>
 
-            </tr>
+        </tr>
 
-          </tbody>
-        </table>
+      </tbody>
+    </table>
   </mat-card>
 
   <mat-card class="add">
-      <button mat-fab color="primary" id="btn_plus" (click)="addSpending()">
-        <mat-icon>add</mat-icon>
-      </button> 
+    <button mat-fab color="primary" id="btn_plus" (click)="addSpending()">
+      <mat-icon>add</mat-icon>
+    </button>
   </mat-card>
 
 </div>
-
