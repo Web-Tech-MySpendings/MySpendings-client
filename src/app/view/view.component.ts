@@ -8,6 +8,7 @@ import { Options, LabelType } from 'ng5-slider';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatDialog } from '@angular/material/dialog';
 import { DetailComponent } from '../detail/detail.component';
+import { AddSpendingComponent } from '../add-spending/add-spending.component';
 
 @Component({
   selector: 'app-view',
@@ -46,8 +47,12 @@ export class ViewComponent implements OnInit {
   }
 
   addSpending() {
-    console.log('add spending!');
-    this.router.navigate(['add']);
+        const dialogRef = this.dialog.open(AddSpendingComponent, {
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+    });
   }
 
   logout() {

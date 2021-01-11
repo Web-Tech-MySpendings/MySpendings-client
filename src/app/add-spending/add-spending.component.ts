@@ -4,7 +4,7 @@ import { formatDate } from '@angular/common';
 import { AlertService } from '../alert.service';
 import { ResourceService } from '../resource.service';
 import {Router} from '@angular/router';
-
+import { MatDialogRef, MAT_DIALOG_DATA  } from '@angular/material/dialog';
 
 
 @Component({
@@ -21,6 +21,7 @@ export class AddSpendingComponent implements OnInit {
     private alertService: AlertService,
     private resourceService: ResourceService,
     public router: Router,
+    public dialogRef: MatDialogRef<AddSpendingComponent>,
     ) {
   }
 
@@ -53,7 +54,7 @@ export class AddSpendingComponent implements OnInit {
         this.alertService.successNotification("new spending added");
       }) 
 
-      this.router.navigate(['view']);
+      this.dialogRef.close();
     }
   
   }
