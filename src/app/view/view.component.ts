@@ -190,10 +190,10 @@ export class ViewComponent implements OnInit {
     this.total = 0;
     this.elements=[];
     for (let i = 0; i < data.length; i++) {
-      this.total += data[i].value;
+      this.total += parseFloat(data[i].value);
 
-      if(data[i].value>this.options.ceil){
-        this.options.ceil=data[i].value;
+      if(parseFloat(data[i].value)>this.options.ceil){
+        this.options.ceil=parseFloat(data[i].value);
       }
 
       this.elements.push({
