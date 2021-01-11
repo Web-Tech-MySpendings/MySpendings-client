@@ -52,6 +52,7 @@ table{
     text-align: center;
     margin: auto;
     height: 10px;
+    cursor: pointer;
 }
 
 td {
@@ -62,8 +63,6 @@ td {
 .add{
     text-align: center;
 }
-
-
 
 .selected{
     background-color:white;

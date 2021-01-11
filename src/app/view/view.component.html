@@ -62,12 +62,12 @@
       </thead>
       <tbody>
 
-        <tr *ngFor="let el of elements; let i = index" (click)="openDetailView(el.sid)">
+            <tr *ngFor="let el of elements; let i = index" (click)="openDetailView(el.sid, el.value, el.date, el.type, el.comment)">
 
-          <th scope="row">€ {{el.value}}</th>
-          <td>{{el.date}}</td>
-          <td>{{el.category}}</td>
-          <td>{{el.comment}}</td>
+              <th scope="row">€ {{el.value}}</th>
+              <td>{{el.date}}</td>
+              <td>{{el.type}}</td>
+              <td>{{el.comment}}</td>
 
         </tr>
 

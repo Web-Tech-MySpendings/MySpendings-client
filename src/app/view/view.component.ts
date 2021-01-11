@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { ResourceService } from '../resource.service';
 import { Options, LabelType } from 'ng5-slider';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { MatDialog } from '@angular/material/dialog';
+import { DetailComponent } from '../detail/detail.component';
 
 @Component({
   selector: 'app-view',
@@ -31,7 +33,8 @@ export class ViewComponent implements OnInit {
   constructor(
     private cookieService: CookieService,
     public router: Router,
-    private resourceService: ResourceService
+    private resourceService: ResourceService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -213,13 +216,24 @@ export class ViewComponent implements OnInit {
         value: data[i].value,
         spending: data[i].sid,
         date: data[i].date.substring(0, 10),
-        category: data[i].type,
+        type: data[i].type,
         comment: data[i].comment,
       });
     }
   }
 
-  openDetailView(sid) {
-    console.log('DETAIL VIEW!!! sid=' + sid);
+
+  openDetailView(sid, value, date, type, comment): void{
+   
+    const dialogRef = this.dialog.open(DetailComponent, {
+      data: {sid: sid, value: value, date: date, type: type, comment: comment}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      //TODO: Update Table !!
+
+    });
+
   }
 }

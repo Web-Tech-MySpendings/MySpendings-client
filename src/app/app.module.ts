@@ -34,6 +34,7 @@ import { ViewComponent } from './view/view.component';
 import { Interceptor } from './interceptor.interceptor';
 import { ProfileComponent } from './profile/profile.component';
 import { ChartComponent } from './chart/chart.component';
+import { DetailComponent } from './detail/detail.component';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { ChartComponent } from './chart/chart.component';
     ViewComponent,
     ProfileComponent,
     ChartComponent,
+    DetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +70,10 @@ import { ChartComponent } from './chart/chart.component';
     MatNativeDateModule,
     Ng5SliderModule,
   ],
+  entryComponents: [
+    DetailComponent
+  ],
+
   providers: [
     CurrencyPipe,
     CookieService,
