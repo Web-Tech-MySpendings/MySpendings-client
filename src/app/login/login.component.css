@@ -2,6 +2,10 @@
   align-self: center;
 }
 
+mat-card{
+    min-width: 300px;
+}
+
 .login-form {
   padding: 20px;
 }

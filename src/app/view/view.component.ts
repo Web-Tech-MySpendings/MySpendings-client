@@ -9,6 +9,7 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatDialog } from '@angular/material/dialog';
 import { DetailComponent } from '../detail/detail.component';
 import { AddSpendingComponent } from '../add-spending/add-spending.component';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'app-view',
