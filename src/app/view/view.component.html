@@ -62,16 +62,18 @@
       </thead>
       <tbody>
 
-            <tr *ngFor="let el of elementsAll; let i = index">
+        <tr *ngFor="let el of elementsAll; let i = index">
 
-              <th scope="row">€ {{el.value}}</th>
-              <td>{{el.date}}</td>
-              <td>{{el.type}}</td>
-              <td>{{el.comment}}</td>
-              <td>
-                <button mat-menu-item id="btn_update" (click)="openDetailView(el.sid, el.value, el.date, el.type, el.comment)">
-                <mat-icon>settings</mat-icon>
-              </button></td>
+          <th scope="row">€ {{el.value}}</th>
+          <td>{{el.date}}</td>
+          <td>{{el.type}}</td>
+          <td>{{el.comment}}</td>
+          <td class="settings">
+            <button mat-menu-item id="btn_update"
+              (click)="openDetailView(el.sid, el.value, el.date, el.type, el.comment)">
+              <mat-icon>settings</mat-icon>
+            </button>
+          </td>
 
         </tr>
 
@@ -88,16 +90,18 @@
       </thead>
       <tbody>
 
-            <tr *ngFor="let el of elementsMonth; let i = index">
+        <tr *ngFor="let el of elementsMonth; let i = index">
 
-              <th scope="row">€ {{el.value}}</th>
-              <td>{{el.date}}</td>
-              <td>{{el.type}}</td>
-              <td>{{el.comment}}</td>
-              <td>
-                <button mat-menu-item id="btn_update" (click)="openDetailView(el.sid, el.value, el.date, el.type, el.comment)">
-                <mat-icon>settings</mat-icon>
-              </button></td>
+          <th scope="row">€ {{el.value}}</th>
+          <td>{{el.date}}</td>
+          <td>{{el.type}}</td>
+          <td>{{el.comment}}</td>
+          <td class="settings">
+            <button mat-menu-item id="btn_update"
+              (click)="openDetailView(el.sid, el.value, el.date, el.type, el.comment)">
+              <mat-icon>settings</mat-icon>
+            </button>
+          </td>
 
         </tr>
 
@@ -114,16 +118,18 @@
       </thead>
       <tbody>
 
-            <tr *ngFor="let el of elementsFilter; let i = index">
+        <tr *ngFor="let el of elementsFilter; let i = index">
 
-              <th scope="row">€ {{el.value}}</th>
-              <td>{{el.date}}</td>
-              <td>{{el.type}}</td>
-              <td>{{el.comment}}</td>
-              <td>
-                <button mat-menu-item id="btn_update" (click)="openDetailView(el.sid, el.value, el.date, el.type, el.comment)">
-                <mat-icon>settings</mat-icon>
-              </button></td>
+          <th scope="row">€ {{el.value}}</th>
+          <td>{{el.date}}</td>
+          <td>{{el.type}}</td>
+          <td>{{el.comment}}</td>
+          <td class="settings">
+            <button mat-menu-item id="btn_update"
+              (click)="openDetailView(el.sid, el.value, el.date, el.type, el.comment)">
+              <mat-icon>settings</mat-icon>
+            </button>
+          </td>
 
         </tr>
 

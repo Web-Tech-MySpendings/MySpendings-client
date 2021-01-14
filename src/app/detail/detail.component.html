@@ -1,49 +1,49 @@
 <div class="body">
-    <mat-card >
-      <mat-form-field class="addSpending">
-        <mat-label>Update Spending</mat-label>
-        €<input digitOnly matInput [(ngModel)]="dialogData.value" placeholder="0.00" type="number"
-          value="0.00">
-      </mat-form-field>
-    
-  
-      <mat-form-field appearance="fill">
-        <mat-label>Choose a date</mat-label>
-        <input matInput [matDatepicker]="picker" [(ngModel)]="dialogData.date">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-  
-  
-      <mat-button-toggle-group name="fontStyle" aria-label="Font Style" [value]="dialogData.type"  [(ngModel)]="dialogData.type">
-        <mat-button-toggle value="general">General</mat-button-toggle>
-        <mat-button-toggle value="Food" >Food</mat-button-toggle>
-        <mat-button-toggle value="Mobility" >Mobility</mat-button-toggle>
-        <mat-button-toggle value="Education" >Education</mat-button-toggle>
-        <mat-button-toggle value="Travel" >Travel</mat-button-toggle>
-        <mat-button-toggle value="Entertainment">Entertainment</mat-button-toggle>
-      </mat-button-toggle-group>
-  
-      
-      <mat-form-field appearance="fill" class="comment">
-        <mat-label>Comment</mat-label>
-        <textarea matInput [(ngModel)]="dialogData.comment"></textarea>
-      </mat-form-field>
-  
-    </mat-card>
-    
-    
-    <mat-card class="update">
-      <button mat-fab color="primary" id="btn_update" (click)="updateData()" href="">
-        <mat-icon>cached</mat-icon>
-      </button> 
-      <button mat-fab color="primary" id="btn_delete" (click)="deleteSpending()">
-        <mat-icon>delete</mat-icon>
-      </button> 
-    </mat-card>
-    
-  
+  <mat-card>
+    <mat-form-field class="addSpending">
+      <mat-label>Update Spending</mat-label>
+      €<input digitOnly matInput [(ngModel)]="dialogData.value" placeholder="0.00" type="number" value="0.00">
+    </mat-form-field>
 
-  
-  
-  </div>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="dialogData.date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+
+    <mat-button-toggle-group id="group" name="fontStyle" aria-label="Font Style" [value]="dialogData.type"
+      [(ngModel)]="dialogData.type">
+      <mat-button-toggle value="general">General</mat-button-toggle>
+      <mat-button-toggle value="Food">Food</mat-button-toggle>
+      <mat-button-toggle value="Mobility">Mobility</mat-button-toggle>
+      <mat-button-toggle value="Education">Education</mat-button-toggle>
+      <mat-button-toggle value="Travel">Travel</mat-button-toggle>
+      <mat-button-toggle value="Entertainment">Entertainment</mat-button-toggle>
+    </mat-button-toggle-group>
+
+
+    <mat-form-field appearance="fill" class="comment">
+      <mat-label>Comment</mat-label>
+      <textarea matInput [(ngModel)]="dialogData.comment"></textarea>
+    </mat-form-field>
+
+  </mat-card>
+
+
+  <mat-card class="update">
+    <button mat-fab color="primary" id="btn_update" (click)="updateData()" href="">
+      <mat-icon>cached</mat-icon>
+    </button>
+    <button mat-fab color="primary" id="btn_delete" (click)="deleteSpending()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card>
+
+
+
+
+
+</div>
