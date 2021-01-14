@@ -58,7 +58,7 @@ export class ChartComponent implements OnInit {
     this.myChart = new Chart('chart', {
       options: this.options,
     });
-    // this.reportChart('all');
+    this.reportChart('all');
   }
 
   reportChart(type: string) {
@@ -76,9 +76,9 @@ export class ChartComponent implements OnInit {
             let month = data[i].date.substring(0, 7); // extract year and month
             if (monthlySum.hasOwnProperty(month)) {
               monthlySum[month] =
-                parseInt(monthlySum[month]) + parseInt(data[i].value);
+                parseFloat(monthlySum[month]) + parseFloat(data[i].value);
             } else {
-              monthlySum[month] = parseInt(data[i].value);
+              monthlySum[month] = parseFloat(data[i].value);
             }
           }
           this.createMonthlyChart(monthlySum);
@@ -94,7 +94,9 @@ export class ChartComponent implements OnInit {
         this.resourceService
           .getSpendingsForMonth(filterParams)
           .subscribe((result) => {
+            
             const data = result.body;
+            console.log(data);
             this.createDailyChart(data);
           });
         break;
@@ -114,7 +116,7 @@ export class ChartComponent implements OnInit {
     for (let i = 0; i < data.length; i++) {
       let index = labels.indexOf(data[i].type);
       if (index !== -1) {
-        spendings[index] = spendings[index] + data[i].value;
+        spendings[index] = spendings[index] + parseFloat(data[i].value);
       }
     }
     console.log(spendings);
@@ -155,8 +157,8 @@ export class ChartComponent implements OnInit {
       spending.push(0);
     }
     for (let i = 0; i < data.length; i++) {
-      spending[labels.indexOf(parseInt(data[i].date.substring(8, 10)))] =
-        data[i].value;
+      spending[labels.indexOf(parseInt(data[i].date.substring(8, 10)))] +=
+        parseFloat(data[i].value);
     }
     this.myChart.destroy();
     this.myChart = new Chart('chart', {

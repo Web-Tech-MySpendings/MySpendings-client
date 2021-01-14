@@ -29,6 +29,7 @@ export class ResourceService {
     );
   }
 
+  //filter params only start and end date 
   getSpendingsForMonth(filterParams: Object): Observable<any> {
     return this.http.get(
       API.baseUrl +
@@ -48,7 +49,22 @@ export class ResourceService {
     });
   }
 
+  
+
   changePw(data: Object): Observable<any> {
     return this.http.patch(API.baseUrl + '/pw', data, { observe: 'response' });
   }
+
+  insertSpending(data: Object): Observable<any> {
+    return this.http.put(API.baseUrl + '/alter', data, { observe: 'response' });
+  }
+
+  updateSpending(data: Object): Observable<any> {
+    return this.http.patch(API.baseUrl + '/update', data, {observe: 'response'});
+  }
+
+  deleteSpending(sid: number): Observable<any> {
+    return this.http.delete(API.baseUrl + '/alter/'+sid, {observe: 'response'});
+  }
+
 }

@@ -1,7 +1,7 @@
 <app-saldo></app-saldo>
 
 <mat-card class="filter">
-    <mat-button-toggle-group name="filter" aria-label="Filter">
+    <mat-button-toggle-group name="filter" aria-label="Filter" value="all">
         <mat-button-toggle class="filter-btn" value="all" (change)="reportChart($event.value)">Report all
         </mat-button-toggle>
         <mat-button-toggle class="filter-btn" value="month" (change)="reportChart($event.value)">Monthly report

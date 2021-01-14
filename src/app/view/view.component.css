@@ -1,78 +1,85 @@
 /*Disable scrolling*/
-.body{
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 1000px;
+.body {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1000px;
 }
 
-mat-card{
-    margin: 2px;
+mat-card {
+  margin: 2px;
+}
+.settings {
+  width: 10px;
+}
+
+.table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+}
+.table > table {
+  max-width: 100%;
+  margin-bottom: 1rem;
+  display: table;
+  border-collapse: collapse;
 }
 
 
-.filter, .filter-detail {
-    text-align: center;
+.filter,
+.filter-detail {
+  text-align: center;
 }
 
 .filter-detail > * {
-    width: 100%;
+  width: 100%;
 }
 
-
-.filter-btn{ 
-    width: 33%;
-    text-align: center;
+.filter-btn {
+  width: 33%;
+  text-align: center;
 }
 
-
-mat-button-toggle-group{
-    width: 100%;
+mat-button-toggle-group {
+  width: 100%;
 }
-
 
 body.modal-open {
-    position: fixed;
-    overflow: hidden;
+  position: fixed;
+  overflow: hidden;
 }
 
-
-#btn_logout{
-   float: right;
-   margin-bottom: 10px;
-    
+#btn_logout {
+  float: right;
+  margin-bottom: 10px;
 }
 
 .balance {
-    text-align: center;
-    font-size: 3em;
+  text-align: center;
+  font-size: 3em;
 }
 
-
-table{
-    text-align: center;
-    margin: auto;
-    height: 10px;
+table {
+  text-align: center;
+  margin: auto;
+  height: 10px;
 }
 
 td {
-    height: 3em;
-    width: 15em;
+  height: 3em;
+  width: 15em;
 }
 
-.add{
-    text-align: center;
+.add {
+  text-align: center;
 }
 
-
-
-.selected{
-    background-color: #3f51b5;
-    color: white;
+.selected {
+  background-color: white;
+  color: black;
 }
 
 .filterCategory {
-    margin: 15px 5px 0px 5px;
-    min-width: fit-content;
-    width: 15%;
-    
+  margin: 15px 5px 0px 5px;
+  min-width: fit-content;
+  width: 15%;
 }

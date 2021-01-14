@@ -38,7 +38,6 @@ export class LoginComponent implements OnInit {
     if(this.formGroup.valid){
       this.authService.login(this.formGroup.value).subscribe(result=>{
         console.log("Login succeeded")
-        
 
         //Cookies: https://www.npmjs.com/package/ngx-cookie-service
         this.cookieService.set( 'token', result.body.token   ); 
