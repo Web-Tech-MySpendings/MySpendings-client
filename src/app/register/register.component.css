@@ -1,3 +1,15 @@
-mat-card{
-    min-width: 300px;
+
+.main-div {
+  align-self: center;
 }
+
+mat-card {
+  width: 600px;
+}
+
+@media only screen and (max-width: 600px) {
+  mat-card {
+    width: 100%;
+  }
+}
+
