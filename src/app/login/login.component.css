@@ -1,15 +1,25 @@
-.main-div mat-card{
-    padding: 0px;
+.main-div {
+  align-self: center;
 }
 
 .login-form {
-    padding: 20px;
+  padding: 20px;
 }
 
-button{
-    margin-top: 15px;
+button {
+  margin-top: 15px;
 }
 
-mat-toolbar{
-    text-align: center;
+mat-toolbar {
+  text-align: center;
+}
+
+mat-card {
+  width: 600px;
+}
+
+@media only screen and (max-width: 600px) {
+  mat-card {
+    width: 100%;
+  }
 }
