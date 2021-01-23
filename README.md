@@ -2,7 +2,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.3.
 
-### Link to the website hosted on heroku: https://dashboard.heroku.com/apps/my-spendings-webtech, on first visit the server may take a few seconds to switch from idle to up state.
+### Link to the website hosted on heroku: https://my-spendings-webtech.herokuapp.com, on first visit the server may take a few seconds to switch from idle to up state.
 
 ## Build
 
